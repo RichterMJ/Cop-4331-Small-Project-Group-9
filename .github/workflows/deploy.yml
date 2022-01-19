@@ -1,0 +1,29 @@
+# Attempt to set up continuous integration and deployment.
+# This is based on this:
+# https://medium.com/swlh/how-to-deploy-your-application-to-digital-ocean-using-github-actions-and-save-up-on-ci-cd-costs-74b7315facc2
+#
+# TODO Step 4, add secrets (basically env vars) to GitHub. Then uncomment the deployment script in this file.
+
+
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy LAMP app
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{secrets.SSH_HOST}} # IP address of our DigitalOcean.
+          key: ${{secrets.SSH_KEY}} # Public or private key of the server.
+          username: ${{secrets.SSH_USERNAME}} # Username (probably "root").
+          script: |
+            echo "Script does nothing right now"
+            # mkdir /var/www
+            # cd /var/www
+            # git clone https://github.com/RichterMJ/Cop-4331-Small-Project-Group-9
+            # echo "Deployment successful to DigitalOcean"

@@ -1,9 +1,11 @@
+
 <?php
 
 $inData = getRequestInfo();
-
-$searchResults = "";
-$searchCount = 0;
+echo $inData;
+$id = 0;
+$firstName = "";
+$lastName = "";
 
 # Doesn't seem to want to work =(
 #$conn = new mysqli(getenv("API_HOST"), getenv("API_USER"), getenv("API_PASS"), getenv("API_DB"));
@@ -12,27 +14,15 @@ $conn = new mysqli('localhost', 'apiUser', 'group9apiUser', 'COP4331');
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
-    $stmt = $conn->prepare("SELECT Name FROM Colors WHERE Name LIKE ? AND UserID=?");
-    $colorName = "%" . $inData["search"] . "%";
-    $stmt->bind_param("ss", $colorName, $inData["userId"]);
+    $stmt = $conn->prepare("SELECT ID, FirstName, LastName FROM Users WHERE Login=? AND Password=?");
+    $stmt->bind_param("ss", $inData["login"], $inData["password"]);
     $stmt->execute();
-
     $result = $stmt->get_result();
 
-    while ($row = $result->fetch_assoc()) {
-
-        if ($searchCount > 0) {
-            $searchResults .= ",";
-        }
-
-        $searchCount++;
-        $searchResults .= '"' . $row["Name"] . '"';
-    }
-
-    if ($searchCount == 0) {
-        returnWithError("No Records Found");
+    if ($row = $result->fetch_assoc()) {
+        returnWithInfo($row['FirstName'], $row['LastName'], $row['ID']);
     } else {
-        returnWithInfo($searchResults);
+        returnWithError("No Records Found");
     }
 
     $stmt->close();
@@ -44,7 +34,7 @@ function getRequestInfo()
     return json_decode(file_get_contents('php://input'), true);
 }
 
-function sendResultInfoAsJson($obj)
+function sendResultInfoAsJson( $obj )
 {
     header('Content-type: application/json');
     echo $obj;
@@ -56,9 +46,9 @@ function returnWithError($err)
     sendResultInfoAsJson($retValue);
 }
 
-function returnWithInfo($searchResults)
+function returnWithInfo($firstName, $lastName, $id)
 {
-    $retValue = '{"results":[' . $searchResults . '],"error":""}';
+    $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
     sendResultInfoAsJson($retValue);
 }
 

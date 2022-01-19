@@ -1,4 +1,5 @@
 <?php
+
 $inData = getRequestInfo();
 
 $firstName = $inData["FirstName"];
@@ -7,7 +8,9 @@ $login = $inData["Login"];
 $pass = $inData["Password"];
 
 
-$conn = new mysqli(getenv("API_HOST"), getenv("API_USER"), getenv("API_PASS"), getenv("API_DB"));
+# Doesn't seem to want to work =(
+#$conn = new mysqli(getenv("API_HOST"), getenv("API_USER"), getenv("API_PASS"), getenv("API_DB"));
+$conn = new mysqli('localhost', 'apiUser', 'group9apiUser', 'COP4331');
 
 if ($conn->connect_error) {
     returnWithError( $conn->connect_error );

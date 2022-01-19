@@ -1,7 +1,7 @@
 <?php
 
 $inData = getRequestInfo();
-echo $inData;
+
 $id = 0;
 $firstName = "";
 $lastName = "";

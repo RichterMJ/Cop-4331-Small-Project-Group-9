@@ -7,7 +7,7 @@ $login = $inData["Login"];
 $pass = $inData["Password"];
 
 
-$conn = new mysqli(getenv("DB_HOST"), getenv("API_USER"), getenv("API_PASS"), getenv("API_DB"));
+$conn = new mysqli(getenv("API_HOST"), getenv("API_USER"), getenv("API_PASS"), getenv("API_DB"));
 
 if ($conn->connect_error) {
     returnWithError( $conn->connect_error );

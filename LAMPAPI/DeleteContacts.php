@@ -7,12 +7,9 @@ $searchCount = 0;
 
 $conn = new mysqli(getenv("DB_HOST"), getenv("API_USER"), getenv("API_PASS"), getenv("API_DB"));
 
-if ($conn->connect_error)
-{
-    returnWithError( $conn->connect_error );
-}
-else
-{
+if ($conn->connect_error) {
+    returnWithError($conn->connect_error);
+} else {
     $stmt = $conn->prepare("delete from Contacts where ID=?");
     $stmt->bind_param("s", $inData["ContactID"]);
     $stmt->execute();
@@ -28,22 +25,22 @@ function getRequestInfo()
     return json_decode(file_get_contents('php://input'), true);
 }
 
-function sendResultInfoAsJson( $obj )
+function sendResultInfoAsJson($obj)
 {
     header('Content-type: application/json');
     echo $obj;
 }
 
-function returnWithError( $err )
+function returnWithError($err)
 {
     $retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
-    sendResultInfoAsJson( $retValue );
+    sendResultInfoAsJson($retValue);
 }
 
 function returnNoError()
 {
     $retValue = '{"error":""}';
-    sendResultInfoAsJson( $retValue );
+    sendResultInfoAsJson($retValue);
 }
 
 ?>

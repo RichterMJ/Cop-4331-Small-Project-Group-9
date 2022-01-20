@@ -2,6 +2,7 @@
 
 $inData = getRequestInfo();
 
+$isUsernameTaken = 0;
 $firstName = $inData["FirstName"];
 $lastName = $inData["LastName"];
 $login = $inData["Login"];
@@ -17,20 +18,21 @@ if ($conn->connect_error) {
 } else {
     $stmt = $conn->prepare("SELECT Login FROM Users WHERE Login=?");
     $stmt->bind_param("s", $login);
+
     $stmt->execute();
-    $result = stmt->get_result();
+    $result = $stmt->get_result();
     if ($result->num_rows > 0) {
-      returnWithError("Username has already taken");
+      $isUsernameTaken = 1;
+      returnWithResult("Username has already taken");
     }
     else {
       $stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?)");
       $stmt->bind_param("ssss",$firstName, $lastName, $login, $pass);
       $stmt->execute();
-      sendResultInfoAsJson($firstName, $lastName, $login, $pass);
+      returnWithResult($isUsernameTaken, $firstName, $lastName, $login, $pass);
     }
     $stmt->close();
     $conn->close();
-    returnWithError("");
 
 }
 
@@ -38,9 +40,9 @@ function getRequestInfo()
 {
     return json_decode(file_get_contents('php://input'), true);
 }
-function returnWithResult($firstname, $lastName, $login, $password)
+function returnWithResult($isUsernameTaken, $firstName, $lastName, $login, $password)
 {
-  $retVal = '{"firstName" : "' . $firstname . '", "lastName" : "' . $lastName . '", "login" : "' . $login . '","password" : "' . $password . '"}';
+  $retVal = '{"isUsernameTaken" : ' . $isUsernameTaken . ',"firstName" : "' . $firstName . '", "lastName" : "' . $lastName . '", "login" : "' . $login . '","password" : "' . $password . '"}';
   sendResultInfoAsJson($retVal);
 }
 function sendResultInfoAsJson($obj)

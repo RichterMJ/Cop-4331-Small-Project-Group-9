@@ -1,64 +1,55 @@
 
 <?php
 
-	$inData = getRequestInfo();
+$inData = getRequestInfo();
+echo $inData;
+$id = 0;
+$firstName = "";
+$lastName = "";
 
-	$id = 0;
-	$firstName = "";
-	$lastName = "";
+# Doesn't seem to want to work =(
+#$conn = new mysqli(getenv("API_HOST"), getenv("API_USER"), getenv("API_PASS"), getenv("API_DB"));
+$conn = new mysqli('localhost', 'apiUser', 'group9apiUser', 'COP4331');
 
-	$conn = new mysqli("localhost", "apiUser", "group9apiUser", "COP4331");
-	if( $conn->connect_error )
-	{
-		returnWithError( $conn->connect_error );
-	}
-	else
-	{
-		$stmt = $conn->prepare("select COUNT(*) from Users where Login=? AND Password=?");
-		$stmt->bind_param("ss", $inData["Login"], $inData["Password"]);
-		$stmt->execute();
-		$result = $stmt->get_result();
-		$row = $result->fetch_assoc();
+if ($conn->connect_error) {
+    returnWithError($conn->connect_error);
+} else {
+    $stmt = $conn->prepare("SELECT ID, FirstName, LastName FROM Users WHERE Login=? AND Password=?");
+    $stmt->bind_param("ss", $inData["login"], $inData["password"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-		if($row['COUNT(*)'] == 1)
-		{
-      $stmt = $conn->prepare("SELECT ID FROM Users WHERE Login=? AND Password=?");
-			$stmt->bind_param("ss", $inData["Login"], $inData["Password"]);
-			$stmt->execute();
-			$result = $stmt->get_result();
-			$row = $result->fetch_assoc();
-			returnTrue($row['ID']);
-		}
-		else
-		{
-			returnFalse();
-		}
+    if ($row = $result->fetch_assoc()) {
+        returnWithInfo($row['FirstName'], $row['LastName'], $row['ID']);
+    } else {
+        returnWithError("No Records Found");
+    }
 
-		$stmt->close();
-		$conn->close();
-	}
+    $stmt->close();
+    $conn->close();
+}
 
-	function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
+function getRequestInfo()
+{
+    return json_decode(file_get_contents('php://input'), true);
+}
 
-	function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
+function sendResultInfoAsJson( $obj )
+{
+    header('Content-type: application/json');
+    echo $obj;
+}
 
-	function returnTrue($ID)
-	{
-		$retValue = '{"LoginSuccess": true, "ID": '.$ID.'}';
-		sendResultInfoAsJson( $retValue );
-	}
+function returnWithError($err)
+{
+    $retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+    sendResultInfoAsJson($retValue);
+}
 
-	function returnFalse()
-	{
-		$retValue = '{"LoginSuccess":false}';
-		sendResultInfoAsJson( $retValue );
-	}
+function returnWithInfo($firstName, $lastName, $id)
+{
+    $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+    sendResultInfoAsJson($retValue);
+}
 
 ?>

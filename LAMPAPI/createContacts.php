@@ -2,7 +2,7 @@
 $inData = getRequestInfo();
 
 
-$name = $inData[""];
+$name = $inData["Name"];
 $phoneNumber = $inData["PhoneNumber"];
 $email = $inData["Email"];
 $userId = $inData["UserID"];
@@ -22,7 +22,7 @@ if ($conn->connect_error) {
     $stmt->execute();
     $stmt->close();
     $conn->close();
-    returnWithError("");
+    returnWithInfo($name, $phoneNumber, $email, $userId);
 }
 
 function getRequestInfo()
@@ -35,7 +35,11 @@ function sendResultInfoAsJson($obj)
     header('Content-type: application/json');
     echo $obj;
 }
-
+function returnWithInfo($name, $phoneNumber, $email, $userId)
+{
+  $retVal = '{"name": "'.$name.'", "phoneNumber": "'.$phoneNumber.'","email": "'.$email.'","userID": '.$userId.'}';
+  sendResultInfoAsJson($retVal);
+}
 function returnWithError($err)
 {
     $retValue = '{"error":"' . $err . '"}';
@@ -43,4 +47,3 @@ function returnWithError($err)
 }
 
 ?>
-

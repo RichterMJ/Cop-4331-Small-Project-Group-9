@@ -1,10 +1,10 @@
-//const urlBase = 'https://127.0.0.1/Routes';
-const urlBase = 'http://cops43319.xyz/Routes';
+const urlBase = 'http://cops43319.xyz/LAMPAPI';
 
 let userId = 0;
 let firstName = '';
 let lastName = '';
 
+// TODO Add MD5 hashing to the password.
 function signIn()
 {
     let login = document.getElementById('username').value;
@@ -13,11 +13,11 @@ function signIn()
     document.getElementById('loginResult').innerHTML = '';
 
     let jsonPayload = JSON.stringify({
-        login: login,
-        password: password
+        Login: login,
+        Password: password
     });
 
-    let url = urlBase + '/SignIn.php'
+    let url = urlBase + '/Login.php'
 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
@@ -38,7 +38,7 @@ function signIn()
                 lastName = res.lastName;
 
                 // saveCookie();
-                window.location.href = 'color.html';
+                window.location.href = 'color.html'; // TODO Figure out what this is.
             }
         };
 

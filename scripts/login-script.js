@@ -17,7 +17,7 @@ function signIn()
         Password: md5(password),
     });
 
-    const loginAPI = urlBase + '/LAMPAPI/Login.php'
+    const loginAPI = urlBase + '/LAMPAPI/LoginUser.php'
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', loginAPI, true);

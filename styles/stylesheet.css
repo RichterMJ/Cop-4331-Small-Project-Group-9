@@ -7,8 +7,7 @@ section {
 
     position: static;
     margin: 2em auto;
-    width: 100px;
-
+    width: 50px;
     /* Other styling */
     letter-spacing: 0.1em;
     border: 1px solid black;

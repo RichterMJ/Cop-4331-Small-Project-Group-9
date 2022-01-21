@@ -15,8 +15,12 @@ section {
     background-color: #eae8ea;
 }
 
-#signup-button a
-{
+.forms .form-group label {
+    margin: 0 0 .5em 0;
+}
+
+
+#signup-button a {
     color: white;
     text-decoration: none;
 }

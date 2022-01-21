@@ -13,6 +13,8 @@ function signIn()
 
     document.getElementById('loginResult').innerHTML = '';
 
+    console.log(`MD5(${password}) = ${md5(password)}`);
+
     const jsonPayload = JSON.stringify({
         Login: login,
         Password: password

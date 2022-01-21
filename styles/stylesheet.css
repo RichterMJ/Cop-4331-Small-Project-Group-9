@@ -4,11 +4,9 @@ section {
 }
 
 .forms {
-
     position: static;
     margin: 2em auto;
-    width: 50px;
-    /* Other styling */
+    width: 40%;
     letter-spacing: 0.1em;
     border: 1px solid black;
     background-color: #eae8ea;
@@ -18,6 +16,13 @@ section {
     margin: 0 0 .5em 0;
 }
 
+#login-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 30%;
+}
 
 #signup-button a {
     color: white;

@@ -28,20 +28,22 @@ window.onload = function() {
 /* Who needs to escape data anyways? */
 function convertContactsToTable(contacts) {
     return `
-        <table class="table thead-dark table-striped">
-            <thead>
-                <tr>
-                    <th style="width: 25%">Name</td>
-                    <th style="width: 25%">Phone number</td>
-                    <th style="width: 25%">Email</td>
-                    <th style="width: 10%"></td>
-                    <th style="width: 15%"></td>
-                </tr>
-            </thead>
-            <tbody>
-                ${contacts.map(convertContactToTableRow).join('')}
-            </tbody>
-        </table>
+        <div class="forms container text-center py-5">
+			<table class="table thead-dark table-striped">
+				<thead>
+					<tr>
+						<th style="width: 25%">Name</td>
+						<th style="width: 25%">Phone number</td>
+						<th style="width: 25%">Email</td>
+						<th style="width: 10%"></td>
+						<th style="width: 15%"></td>
+					</tr>
+				</thead>
+				<tbody>
+					${contacts.map(convertContactToTableRow).join('')}
+				</tbody>
+			</table>
+		</div>
     `;
 }
 

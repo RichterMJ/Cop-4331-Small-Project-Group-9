@@ -17,6 +17,7 @@
 
     <body>
 
+        <!-- Welcome bar. -->
         <nav class="navbar navbar-expand-lg navbar-light bg-dark text-light fixed-top">
             <div class="container-fluid">
                 <button
@@ -34,20 +35,40 @@
             </div>
         </nav>
 
-        <form class="forms container text-center py-5">
-            <h2 class="m-3">Create Contact Form</h2>
-            <div class="mb-3">
-                <input type="text" class="form-control" id="name" placeholder="Name" autofocus>
+        <!-- Main body. -->
+        <section>
+
+            <!-- Seach contacts form. -->
+            <form class="forms container text-center py-5">
+                <h2 class="m-3">Search Contacts Form</h2>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="searchQuery" placeholder="Name" autofocus>
+                </div>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="searchContact()">Search contacts</button>
+                <span id="addContactResult"></span>
+            </form>
+
+            <!-- Search contacts results. -->
+            <div id="searchResults" class="forms container text-center py-5">
             </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" id="email" placeholder="Email">
-            </div>
-            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="addContact()">Add contact</button>
-        </form>
-        <span id="addContactResult"></span>
+
+            <!-- Create contact form. -->
+            <form class="forms container text-center py-5">
+                <h2 class="m-3">Create Contact Form</h2>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="name" placeholder="Name" autofocus>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="email" placeholder="Email">
+                </div>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="addContact()">Add contact</button>
+                <span id="addContactResult"></span>
+            </form>
+
+        </section>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>

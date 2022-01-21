@@ -12,7 +12,7 @@ async function signUp() {
         FirstName: firstName,
         LastName: lastName,
         Login: username,
-        Password: password
+        Password: md5(password),
     });
 
     const res = await fetch(signupAPI, {

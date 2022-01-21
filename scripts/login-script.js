@@ -5,7 +5,6 @@ let userId = 0;
 let firstName = '';
 let lastName = '';
 
-// TODO Add MD5 hashing to the password.
 function signIn()
 {
     const login = document.getElementById('username').value;
@@ -13,11 +12,9 @@ function signIn()
 
     document.getElementById('loginResult').innerHTML = '';
 
-    console.log(`MD5(${password}) = ${md5(password)}`);
-
     const jsonPayload = JSON.stringify({
         Login: login,
-        Password: password
+        Password: md5(password),
     });
 
     const loginAPI = urlBase + '/LAMPAPI/Login.php'

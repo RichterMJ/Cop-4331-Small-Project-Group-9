@@ -1,5 +1,6 @@
-const urlBase = 'http://cops43319.xyz/LAMPAPI';
+const urlBase = 'http://cops43319.xyz';
 
+// ???
 let userId = 0;
 let firstName = '';
 let lastName = '';
@@ -7,38 +8,39 @@ let lastName = '';
 // TODO Add MD5 hashing to the password.
 function signIn()
 {
-    let login = document.getElementById('username').value;
-    let password = document.getElementById('password').value;
+    const login = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
     document.getElementById('loginResult').innerHTML = '';
 
-    let jsonPayload = JSON.stringify({
+    const jsonPayload = JSON.stringify({
         Login: login,
         Password: password
     });
 
-    let url = urlBase + '/Login.php'
+    const loginAPI = urlBase + '/LAMPAPI/Login.php'
 
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', url, true);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', loginAPI, true);
     xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
 
     try {
         xhr.onreadystatechange = () => {
             if (this.readyState == 4 && this.status == 200) {
-                let res = JSON.parse(xhr.responseText);
-                userId = res.id;
+                const res = JSON.parse(xhr.responseText);
 
-                if (userId < 1) {
+                if (res.id < 1) {
                     document.getElementById('loginResult').innerHTML = 'User/Password combination incorrect';
                     return;
                 }
 
+                // TODO Figure out if we actually need this.
+                userId = res.id;
                 firstName = res.firstName;
                 lastName = res.lastName;
 
                 // saveCookie();
-                window.location.href = 'color.html'; // TODO Figure out what this is.
+                window.location.href = urlBase + '/contacts.html';
             }
         };
 

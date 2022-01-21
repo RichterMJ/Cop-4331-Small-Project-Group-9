@@ -8,7 +8,7 @@ async function signIn() {
     document.getElementById('loginResult').innerHTML = '';
 
 
-    const res = await fetch('/LAMPAPI/Login.php', {
+    const res = await fetch('/LAMPAPI/LoginUser.php', {
         method: 'POST',
         body: JSON.stringify({ Login: login, Password: md5(password) }),
     });

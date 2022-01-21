@@ -149,7 +149,7 @@ async function updateContact(ContactID) {
     const PhoneNumber = document.getElementById('editToPhonenumber').value;
     const Email = document.getElementById('editToEmail').value;
 
-    const res = await fetch('LAMPAPI/UpdateContacts.php', {
+    const res = await fetch('LAMPAPI/UpdateContact.php', {
         method: 'POST',
         body: JSON.stringify({ ContactID, Name, PhoneNumber, Email }),
     });
@@ -172,7 +172,7 @@ async function updateContact(ContactID) {
 /* Call the API to delete a contact. Must supply `ContactID` as an argument. */
 async function deleteContact(ContactID) {
     
-    const res = await fetch('LAMPAPI/DeleteContacts.php', {
+    const res = await fetch('LAMPAPI/DeleteContact.php', {
         method: 'POST',
         body: JSON.stringify({ ContactID }),
     });
@@ -224,7 +224,7 @@ async function addContact() {
     const PhoneNumber = document.getElementById('phoneNumber').value;
     const Email = document.getElementById('email').value;
 
-    const res = await fetch('/LAMPAPI/createContacts.php', {
+    const res = await fetch('/LAMPAPI/CreateContact.php', {
         method: 'POST',
         body: JSON.stringify({ Name, PhoneNumber, Email, UserID }),
     });

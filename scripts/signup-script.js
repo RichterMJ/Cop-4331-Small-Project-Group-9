@@ -1,4 +1,3 @@
-// TODO Add MD5 hashing to the password.
 async function signUp() {
 
     const firstName = document.getElementById('firstName').value;
@@ -6,7 +5,7 @@ async function signUp() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    const signupAPI = '/LAMPAPI/createUsers.php';
+    const signupAPI = '/LAMPAPI/CreateUser.php';
 
     const jsonPayload = JSON.stringify({
         FirstName: firstName,

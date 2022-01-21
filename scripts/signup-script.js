@@ -27,7 +27,7 @@ async function signUp() {
     const resJson = await res.json();
 
     if (resJson.error !== '') {
-        document.getElementById('signupResult').innerHTML = res.error;
+        document.getElementById('signupResult').innerHTML = resJson.error;
     } else {
         document.getElementById('signupResult').innerHTML = 'Sign up successful!';
     }

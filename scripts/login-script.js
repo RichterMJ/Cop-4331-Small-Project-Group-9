@@ -22,24 +22,20 @@ function signIn()
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', loginAPI, true);
-    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8')
+    xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
 
     try {
         xhr.onreadystatechange = () => {
-            if (this.readyState == 4 && this.status == 200) {
+            if (xhr.readyState == 4 && xhr.status == 200) {
                 const res = JSON.parse(xhr.responseText);
 
-                if (res.id < 1) {
+                if (res.error !== '') {
                     document.getElementById('loginResult').innerHTML = 'User/Password combination incorrect';
+                    console.log('An error was encountered while trying to login.');
                     return;
                 }
 
-                // TODO Figure out if we actually need this.
-                userId = res.id;
-                firstName = res.firstName;
-                lastName = res.lastName;
-
-                // saveCookie();
+                saveCookie({ UserID: res.id, FirstName: res.firstName, LastName: res.lastName });
                 window.location.href = urlBase + '/contacts.html';
             }
         };
@@ -47,6 +43,7 @@ function signIn()
         xhr.send(jsonPayload);
     } catch (err) {
         document.getElementById('loginResult').innerHTML = err.message;
+        console.log('An error was CAUGHT while attempting login.');
     }
 }
 

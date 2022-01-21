@@ -20,8 +20,11 @@ jobs:
           key: ${{secrets.SSH_KEY}} # Public or private key of the server.
           username: ${{secrets.SSH_USERNAME}} # Username (probably "root").
           script: |
-            cd /var/www/Cop-4331-Small-Project-Group-9
+            # The first time running this script you'll need to uncomment the following three lines:
+            # cd /var/www
             # git clone https://github.com/RichterMJ/Cop-4331-Small-Project-Group-9
+            # mv Cop-4331-Small-Project-Group-9 html
+            cd /var/www/html
             git fetch
             git reset --hard @{u}
             echo "Deployment successful to DigitalOcean"

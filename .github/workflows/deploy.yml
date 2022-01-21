@@ -1,8 +1,6 @@
 # Attempt to set up continuous integration and deployment.
 # This is based on this:
 # https://medium.com/swlh/how-to-deploy-your-application-to-digital-ocean-using-github-actions-and-save-up-on-ci-cd-costs-74b7315facc2
-#
-# TODO Step 4, add secrets (basically env vars) to GitHub. Then uncomment the deployment script in this file.
 
 
 name: Build & Deploy
@@ -25,5 +23,7 @@ jobs:
             # echo "Script does nothing right now"
             mkdir /var/www
             cd /var/www
-            git clone https://github.com/RichterMJ/Cop-4331-Small-Project-Group-9
+            # git clone https://github.com/RichterMJ/Cop-4331-Small-Project-Group-9
+            git fetch
+            git reset --hard @{u}
             echo "Deployment successful to DigitalOcean"

@@ -22,8 +22,8 @@ jobs:
           key: ${{secrets.SSH_KEY}} # Public or private key of the server.
           username: ${{secrets.SSH_USERNAME}} # Username (probably "root").
           script: |
-            echo "Script does nothing right now"
-            # mkdir /var/www
-            # cd /var/www
-            # git clone https://github.com/RichterMJ/Cop-4331-Small-Project-Group-9
-            # echo "Deployment successful to DigitalOcean"
+            # echo "Script does nothing right now"
+            mkdir /var/www
+            cd /var/www
+            git clone https://github.com/RichterMJ/Cop-4331-Small-Project-Group-9
+            echo "Deployment successful to DigitalOcean"

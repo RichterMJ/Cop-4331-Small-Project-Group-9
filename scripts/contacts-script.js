@@ -28,7 +28,7 @@ window.onload = function() {
 /* Who needs to escape data anyways? */
 function convertContactsToTable(contacts) {
     return `
-        <div class="forms container text-center py-5">
+        <div class="forms text-center p-5">
 			<table class="table thead-dark table-striped">
 				<thead>
 					<tr>

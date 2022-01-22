@@ -1,79 +1,71 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="/images/cropped-favicon-32x32.png" sizes="32x32"/>
 
-        <link rel="stylesheet" href="styles/stylesheet.css">
-        <script type="text/javascript" src="scripts/cookie.js"></script>
-        <script type="text/javascript" src="scripts/md5.js"></script>
-        <script type="text/javascript" src="scripts/contacts-script.js"></script>
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="/images/cropped-favicon-32x32.png" sizes="32x32" />
 
-        <title>LAMP View Contacts</title>
-    </head>
+	<link rel="stylesheet" href="styles/stylesheet.css">
+	<script type="text/javascript" src="scripts/cookie.js"></script>
+	<script type="text/javascript" src="scripts/md5.js"></script>
+	<script type="text/javascript" src="scripts/contacts-script.js"></script>
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <body>
+	<title>LAMP View Contacts</title>
+</head>
 
-        <!-- Welcome bar. -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-dark text-light fixed-top">
-            <div class="container-fluid">
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-mdb-toggle="collapse"
-                    data-mdb-target="#navbarExample01"
-                    aria-controls="navbarExample01"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                    >
-                    <i class="fas fa-bars"></i>
-                </button>
-                <h3 id="welcome"></h3>
-            </div>
-        </nav>
+<body>
 
-        <!-- Main body. -->
-        <section>
+	<!-- Welcome bar. -->
+	<nav class="navbar fixed-top m-auto">
+		<div class="container-fluid">
+			<h3 id="welcome"></h3>
+			<button id="logout-button" class="btn btn-md btn-danger justify-left"><a href="index.html">Logout</a></button>
+		</div>
+	</nav>
 
-            <!-- Seach contacts form. -->
-            <form class="forms text-center p-5">
-                <h2 class="m-3">Search Contacts Form</h2>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="searchQuery" placeholder="Name" autofocus>
-                </div>
-                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="searchContact()">Search contacts</button>
-                <span id="addContactResult"></span>
-            </form>
+	<!-- Main body. -->
+	<section>
+		<!-- Seach contacts. -->
+		<div id="search-bar" class="container input-group p-2 mt-5">
+			<input id="searchQuery" type="text" class="form-control" placeholder="Search Contacts" autofocus>
+			<button type="button" class="btn btn-primary btn-md btn-block" onclick="searchContact()">Search</button>
+			<br>
+			<span id="addContactResult"></span>
+		</div>
 
-            <!-- Search contacts results. -->
-            <div id="searchResults">
-            </div>
+		<!-- Search contacts results. -->
+		<div id="search-results">
+		</div>
 
-            <!-- Edit contact form. -->
-            <div id="editContactFormGoesHere"></div>
+		<!-- Edit contact form. -->
+		<div id="editContactFormGoesHere"></div>
 
-            <!-- Create contact form. -->
-            <form id="createContactForm" class="forms text-center p-5">
-                <h2 class="m-3">Create Contact Form</h2>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="name" placeholder="Name" autofocus>
-                </div>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
-                </div>
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="email" placeholder="Email">
-                </div>
-                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="addContact()">Add contact</button>
-                <span id="addContactResult"></span>
-            </form>
+		<!-- Create contact form. -->
+		<form id="createContactForm" class="forms text-center px-5 py-3">
+			<h3 class="m-3">Create New Contact</h3>
+			<div class="mb-3">
+				<input type="text" class="form-control" id="name" placeholder="Name">
+			</div>
+			<div class="mb-3">
+				<input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
+			</div>
+			<div class="mb-3">
+				<input type="text" class="form-control" id="email" placeholder="Email">
+			</div>
+			<button type="button" class="btn btn-primary btn-md btn-block" onclick="addContact()">Add contact</button>
+			<span id="addContactResult"></span>
+		</form>
 
-        </section>
+	</section>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    </body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+</body>
+
 </html>

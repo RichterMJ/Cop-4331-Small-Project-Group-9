@@ -9,7 +9,7 @@ window.onload = function () {
 		FirstName = 'Bill';
 		LastName = 'Marrow';
 
-		document.getElementById('search-results').innerHTML = convertContactsToTable(getMockContacts());
+		document.getElementById('searchResults').innerHTML = convertContactsToTable(getMockContacts());
 	} else {
 		// So secure <3
 		UserID = parseInt(getCookieVal('UserID'));

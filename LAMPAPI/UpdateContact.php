@@ -16,6 +16,9 @@ if ($conn->connect_error) {
     $stmt->bind_param("ssss", $inData["Name"], $inData["PhoneNumber"], $inData["Email"], $inData["ContactID"]);
     $stmt->execute();
 
+
+    # maybe add a check to see rows affected in case we update info to be the same as a different contact
+    
     returnNoError();	
 
     $stmt->close();
@@ -35,7 +38,7 @@ function sendResultInfoAsJson($obj)
 
 function returnWithError($err)
 {
-    $retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+    $retValue = '{"error":"' . $err . '"}';
     sendResultInfoAsJson($retValue);
 }
 

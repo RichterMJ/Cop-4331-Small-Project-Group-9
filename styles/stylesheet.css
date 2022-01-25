@@ -24,7 +24,7 @@ section {
 }
 
 #signup-button a {
-    color: white;
+    color: inherit;
     text-decoration: none;
 }
 
@@ -34,7 +34,7 @@ section {
 	background-color: #eae8ea;
 }
 
-#logout-button a {
+#redirect-button a {
 	text-decoration: none;
 	color: inherit;
 }

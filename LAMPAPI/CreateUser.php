@@ -19,7 +19,7 @@ if ($conn->connect_error) {
     $stmt->execute();
 
     if ($stmt->affected_rows == 1) {
-      returnWithError("");
+      returnNoError();
     } else {
       returnWithError('Username ' . $login . ' is already taken.');
     }
@@ -33,7 +33,6 @@ function getRequestInfo()
     return json_decode(file_get_contents('php://input'), true);
 }
 
-#Just return error
 function returnNoError()
 {
   $retVal = '{"error":""}';

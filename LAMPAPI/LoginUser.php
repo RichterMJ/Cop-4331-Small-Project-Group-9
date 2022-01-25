@@ -22,7 +22,7 @@ if ($conn->connect_error) {
     if ($row = $result->fetch_assoc()) {
         returnWithInfo($row['FirstName'], $row['LastName'], $row['ID']);
     } else {
-        returnWithError("No Records Found");
+        returnWithError("Incorrect Username/Password Combination");
     }
 
     $stmt->close();

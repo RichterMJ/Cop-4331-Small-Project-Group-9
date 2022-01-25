@@ -19,7 +19,7 @@ if ($conn->connect_error) {
     $stmt->execute();
 
     if ($stmt->affected_rows == 1) {
-        returnWithInfo($name, $phoneNumber, $email, $userId);
+        returnNoError();
     } else {
         returnWithError('Could not insert user with credentials: ' . $name . ', ' . $phoneNumber . ', ' . $email . ', ' . $userId);
     }
@@ -38,9 +38,9 @@ function sendResultInfoAsJson($obj)
     header('Content-type: application/json');
     echo $obj;
 }
-function returnWithInfo($name, $phoneNumber, $email, $userId)
+function returnNoError()
 {
-    $retVal = '{"name": "' . $name . '", "phoneNumber": "' . $phoneNumber . '","email": "' . $email . '","userID": ' . $userId . '}';
+    $retValue = '{"error":""}';
     sendResultInfoAsJson($retVal);
 }
 function returnWithError($err)

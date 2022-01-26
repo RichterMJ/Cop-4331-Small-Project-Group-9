@@ -33,7 +33,7 @@
 	<section>
 		<!-- Seach contacts. -->
 		<div id="search-bar" class="container input-group p-2">
-			<input id="searchQuery" type="text" class="form-control" placeholder="Search Contacts" autofocus onchange="searchContact()">
+			<input id="searchQuery" type="text" class="form-control" placeholder="Search Contacts" autofocus oninput="searchContact()">
 			<button type="button" class="btn btn-primary btn-md btn-block" onclick="searchContact()">Search</button>
 			<br>
 			<span id="addContactResult"></span>

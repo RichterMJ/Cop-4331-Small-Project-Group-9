@@ -1,13 +1,18 @@
+
+// Global vars to hold info on the currently logged in user.
 let UserId, FirstName, LastName;
-let lastestSearch = '';
+
+// Global vars to hold the latest query and its results.
+let latestSearchQuery = '';
+let latestSearchResults = null;
 
 const DEBUG = false;
 
 window.onload = function () {
 	if (DEBUG) {
 		UserID = 14;
-		FirstName = 'Bill';
-		LastName = 'Marrow';
+		FirstName = 'MR';
+		LastName = 'DEBUG';
 
 		document.getElementById('searchResults').innerHTML = convertContactsToTable(getMockContacts());
 	} else {
@@ -162,7 +167,7 @@ async function updateContact(ContactID) {
 	if (resJson.error !== '') {
 		document.getElementById('editResults').innerHTML = resJson.error;
 	} else {
-		searchContact(lastestSearch);
+		searchContact(latestSearchQuery);
 		document.getElementById('editContactFormGoesHere').innerHTML = '';
 		document.getElementById('searchResults').scrollIntoView({ block: 'center', behavior: 'smooth' });
 	}
@@ -185,7 +190,7 @@ async function deleteContact(ContactID) {
 	if (resJson.error !== '') {
 		document.getElementById('searchResults').innerHTML = resJson.error;
 	} else {
-		searchContact(lastestSearch);
+		searchContact(latestSearchQuery);
 	}
 }
 
@@ -195,7 +200,7 @@ async function searchContact(search) {
 	if (typeof search === 'undefined')
 		search = document.getElementById('searchQuery').value;
 
-	lastestSearch = search;
+	latestSearchQuery = search;
 
 	const res = await fetch('/LAMPAPI/SearchContacts.php', {
 		method: 'POST',
@@ -211,6 +216,7 @@ async function searchContact(search) {
 	if (resJson.error !== '') {
 		document.getElementById('searchResults').innerHTML = resJson.error;
 	} else {
+		latestSearchResults = resJson.results;
 		document.getElementById('searchResults').innerHTML = convertContactsToTable(resJson.results);
 	}
 

@@ -1,3 +1,6 @@
+html body {
+	background-color: #F3F8F2;
+}
 
 section {
     padding: 2em 0 0 0;
@@ -7,8 +10,9 @@ section {
     margin: 2em auto;
     width: 50%;
     letter-spacing: 0.1em;
-    border: 1px solid black;
-    background-color: #eae8ea;
+    border: 1px solid rgba(0, 0, 0, 0.329);
+	background: #fee076;
+	box-shadow: 0 4px 5px 5px #b3afaf;
 }
 
 .forms .form-group label {
@@ -23,6 +27,10 @@ section {
     width: 30%;
 }
 
+#login-form .btn {
+	color: #F3F8F2;
+}
+
 #signup-button a {
     color: inherit;
     text-decoration: none;
@@ -30,8 +38,9 @@ section {
 
 .navbar {
 	width: 50%;
-	border: 1px solid black;
-	background-color: #eae8ea;
+	border: 1px solid rgba(0, 0, 0, 0.329);
+	background: #fee076;
+	box-shadow: 0 4px 5px 5px #b3afaf;
 }
 
 #redirect-button a {
@@ -42,8 +51,9 @@ section {
 #search-bar {
 	margin: 2em auto;
 	width: 50%;
-	border: 1px solid black;
-    background-color: #eae8ea;
+	border: 1px solid rgba(0, 0, 0, 0.329);
+	background: #fee076;
+	box-shadow: 0 4px 5px 5px #b3afaf;
 }
 
 .contacts:nth-child(odd) {

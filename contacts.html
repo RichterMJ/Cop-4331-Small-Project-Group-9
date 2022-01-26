@@ -22,19 +22,19 @@
 <body>
 
 	<!-- Welcome bar. -->
-	<nav class="navbar m-auto">
+	<nav class="navbar m-auto rounded-bottom">
 		<div class="container-fluid">
 			<h3 id="welcome"></h3>
-			<button id="redirect-button" class="btn btn-md btn-danger justify-left"><a href="index.html">Logout</a></button>
+			<button id="redirect-button" class="btn btn-md btn-outline-dark justify-left"><a href="index.html">Logout</a></button>
 		</div>
 	</nav>
 
 	<!-- Main body. -->
 	<section>
 		<!-- Seach contacts. -->
-		<div id="search-bar" class="container input-group p-2">
+		<div id="search-bar" class="container input-group p-2 rounded-3">
 			<input id="searchQuery" type="text" class="form-control" placeholder="Search Contacts" autofocus oninput="searchContact()">
-			<button type="button" class="btn btn-primary btn-md btn-block" onclick="searchContact()">Search</button>
+			<button type="button" class="btn btn-dark btn-md btn-block" onclick="searchContact()">Search</button>
 			<br>
 			<span id="addContactResult"></span>
 		</div>
@@ -58,7 +58,7 @@
 			<div class="mb-3">
 				<input type="text" class="form-control" id="email" placeholder="Email">
 			</div>
-			<button type="button" class="btn btn-primary btn-md btn-block" onclick="addContact()">Add contact</button>
+			<button type="button" class="btn btn-dark btn-md btn-block" onclick="addContact()">Add contact</button>
 			<span id="addContactResult"></span>
 		</form>
 

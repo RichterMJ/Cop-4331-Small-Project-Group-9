@@ -33,7 +33,7 @@ window.onload = function () {
 /* Who needs to escape data anyways? */
 function convertContactsToTable(contacts) {
 	return `
-		<div class="container text-center p-5" style="border: 1px solid black;">
+		<div class="container text-center p-5" style="border: 1px solid rgba(0, 0, 0, 0.329); box-shadow: 0 4px 5px 5px #b3afaf;">
 			<div class="row p-1">
 				<div class="col-xl-2">Name</div>
 				<div class="col-xl-2">Phone #</div>

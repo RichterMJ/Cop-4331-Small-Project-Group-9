@@ -1,6 +1,6 @@
 
 // Global vars to hold info on the currently logged in user.
-let UserId, FirstName, LastName;
+let UserID, FirstName, LastName;
 
 // Global vars to hold the latest query and its results.
 let latestSearchQuery = '';

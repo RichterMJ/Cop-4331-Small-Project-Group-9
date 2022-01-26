@@ -64,6 +64,7 @@ section {
 	margin: 2em auto;
     letter-spacing: 0.1em;
 	width:50%;
-    border: 1px solid rgba(0, 0, 0, 0.329);
+    /* border: 1px solid rgba(0, 0, 0, 0.329); */
 	background: #fee076;
+	/* box-shadow: 0 4px 5px 5px #b3afaf; */
 }

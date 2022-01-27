@@ -41,11 +41,13 @@ function handlePasswordRepeatInput() {
 
 async function signUp() {
 
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const passwordRepeat = document.getElementById('password-repeat').value;
+    const FirstName = document.getElementById('firstName').value;
+    const LastName = document.getElementById('lastName').value;
+    const Login = document.getElementById('username').value;
+    const Password = document.getElementById('password').value;
+    const PasswordRepeat = document.getElementById('password-repeat').value;
+
+	console.log(JSON.stringify({ FirstName, LastName, Login, Password, PasswordRepeat }));
 
 	let anyBlank = false;
 	for (const htmlId of ['firstName', 'lastName', 'username', 'password']) {
@@ -59,7 +61,7 @@ async function signUp() {
 		return;
 	}
 
-	if (password !== passwordRepeat) {
+	if (Password !== PasswordRepeat) {
 		complainAboutMismatchedPasswords();
 		return;
 	}
@@ -68,12 +70,7 @@ async function signUp() {
 
     const res = await fetch('/LAMPAPI/CreateUser.php', {
         method: 'POST',
-		body: {
-			FirstName: firstName,
-			LastName: lastName,
-			Login: username,
-			Password: md5(password),
-		}
+		body: { FirstName, LastName, Login, Password: md5(Password) },
     });
 
     if (!res.ok) {

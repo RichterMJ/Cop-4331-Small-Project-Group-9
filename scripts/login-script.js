@@ -1,5 +1,17 @@
 const urlBase = 'http://cops43319.xyz';
 
+function complainAboutIncorrectCredentials() {
+	document.getElementById('loginResult').innerHTML = 'Invalid username and/or password, please try again';
+	document.getElementById('username').classList.add('is-invalid');
+	document.getElementById('password').classList.add('is-invalid');
+}
+
+function uncomplainAboutIncorrectCredentials() {
+	document.getElementById('loginResult').innerHTML = '';
+	document.getElementById('username').classList.remove('is-invalid');
+	document.getElementById('password').classList.remove('is-invalid');
+}
+
 async function signIn() {
 
 	const login = document.getElementById('username').value;
@@ -12,8 +24,6 @@ async function signIn() {
 		body: JSON.stringify({ Login: login, Password: md5(password) }),
 	});
 
-	console.log('hashed pass=' + md5(password));
-
 	if (!res.ok) {
 		document.getElementById('loginResult').innerHTML = 'There was an error connecting to the server, try again later.';
 	}
@@ -22,15 +32,13 @@ async function signIn() {
 
 	if (resJson.error !== '') {
 
-		document.getElementById('loginResult').innerHTML = 'User/Password combination incorrect';
-		console.log('An error was encountered while trying to login.');
-		console.log(resJson.error);
+		complainAboutIncorrectCredentials();
 
 		return;
 
 	} else {
 
-		document.getElementById('loginResult').innerHTML = 'Sign in successful!';
+		uncomplainAboutIncorrectCredentials();
 
 		saveCookie({
 			UserID: resJson.id,
@@ -45,28 +53,31 @@ async function signIn() {
 /* This is in case we weren't allowed to use `fetch(..)` forwhatever reason. It probably works. */
 async function $fetch(uri, init) {
 
-	const jsonPayload = init.body;
-	const xhr = new XMLHttpRequest();
+	return new Promise((resolve, reject) => {
 
-	xhr.open(init.method, uri, true);
-	xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+		const jsonPayload = init.body;
+		const xhr = new XMLHttpRequest();
 
-	try {
-		xhr.onreadystatechange = () => {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				resolve({
-					ok: true,
-					json: async () => JSON.parse(xhr.responseText),
-				});
-			}
-		};
+		xhr.open(init.method, uri, true);
+		xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
 
-		xhr.send(jsonPayload);
-	} catch (err) {
-		resolve({
-			ok: false,
-			json: async () => reject(),
-		});
-	}
+		try {
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					resolve({
+						ok: true,
+						json: async () => JSON.parse(xhr.responseText),
+					});
+				}
+			};
+
+			xhr.send(jsonPayload);
+		} catch (err) {
+			resolve({
+				ok: false,
+				json: async () => reject(),
+			});
+		}
+	});
 }
 

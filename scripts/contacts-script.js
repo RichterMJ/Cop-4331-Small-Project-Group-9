@@ -33,13 +33,13 @@ window.onload = function () {
 /* Who needs to escape data anyways? */
 function convertContactsToTable(contacts) {
 	return `
-		<div class="container text-center p-5" style="border: 1px solid rgba(0, 0, 0, 0.329); box-shadow: 0 4px 5px 5px #b3afaf;">
+		<div class="container text-center p-5 px-2">
 			<div class="row p-1">
-				<div class="col-xl-2">Name</div>
-				<div class="col-xl-2">Phone #</div>
-				<div class="col-xl-4">Email</div>
-				<div class="col-xl-2 pt-2"></div>
-				<div class="col-xl-2 pt-2"></div>
+				<div class="col-2">Name</div>
+				<div class="col-2">Phone #</div>
+				<div class="col-4">Email</div>
+				<div class="col-2 pt-2"></div>
+				<div class="col-2 pt-2"></div>
 			</div>
 			<hr>
 			<div>
@@ -52,24 +52,24 @@ function convertContactsToTable(contacts) {
 function convertContactToTableRow(contact) {
 	return `
 		<div class="contacts row p-1">
-			<div class="col-xl-2">${contact.Name}</div>
-			<div class="col-xl-2">${contact.PhoneNumber}</div>
-			<div class="col-xl-4">${contact.Email}</div>
-			<div class="col-xl-2 py-2">${generateUpdateButton(contact)}</div>
-			<div class="col-xl-2 py-2">${generateDeleteButton(contact)}</div>
+			<div class="col-2">${contact.Name}</div>
+			<div class="col-2">${contact.PhoneNumber}</div>
+			<div class="col-4">${contact.Email}</div>
+			<div class="col-2 py-2">${generateUpdateButton(contact)}</div>
+			<div class="col-2 py-2">${generateDeleteButton(contact)}</div>
 		</div>
     `;
 }
 
 function generateUpdateButton(contact) {
 	return `
-		<button class="btn btn-sm btn-block btn-secondary" onclick='editContact(${JSON.stringify(contact)})'>Edit</button>
+		<button class="btn btn-sm btn-block btn-outline-light btn-info" onclick='editContact(${JSON.stringify(contact)})'>Edit</button>
     `;
 }
 
 function generateDeleteButton(contact) {
 	return `
-		<button class="btn btn-sm btn-block btn-danger" onclick="deleteContact(${contact.ID})">Delete</button>
+		<button class="btn btn-sm btn-block btn-outline-light btn-danger" onclick="deleteContact(${contact.ID})">Delete</button>
     `;
 }
 
@@ -79,6 +79,22 @@ function getMockContacts() {
 		{ ID: 2, Name: 'two', PhoneNumber: '222222', Email: 'two@two' },
 		{ ID: 3, Name: 'three', PhoneNumber: '333333', Email: 'three@three' },
 		{ ID: 4, Name: 'four', PhoneNumber: '444444', Email: 'four@four' },
+		{ ID: 5, Name: 'one', PhoneNumber: '111111', Email: 'one@one' },
+		{ ID: 6, Name: 'two', PhoneNumber: '222222', Email: 'two@two' },
+		{ ID: 7, Name: 'three', PhoneNumber: '333333', Email: 'three@three' },
+		{ ID: 8, Name: 'four', PhoneNumber: '444444', Email: 'four@four' },
+		{ ID: 9, Name: 'one', PhoneNumber: '111111', Email: 'one@one' },
+		{ ID: 10, Name: 'two', PhoneNumber: '222222', Email: 'two@two' },
+		{ ID: 11, Name: 'three', PhoneNumber: '333333', Email: 'three@three' },
+		{ ID: 12, Name: 'four', PhoneNumber: '444444', Email: 'four@four' },
+		{ ID: 13, Name: 'one', PhoneNumber: '111111', Email: 'one@one' },
+		{ ID: 14, Name: 'two', PhoneNumber: '222222', Email: 'two@two' },
+		{ ID: 15, Name: 'three', PhoneNumber: '333333', Email: 'three@three' },
+		{ ID: 16, Name: 'four', PhoneNumber: '444444', Email: 'four@four' },
+		{ ID: 17, Name: 'one', PhoneNumber: '111111', Email: 'one@one' },
+		{ ID: 18, Name: 'two', PhoneNumber: '222222', Email: 'two@two' },
+		{ ID: 19, Name: 'three', PhoneNumber: '333333', Email: 'three@three' },
+		{ ID: 20, Name: 'four', PhoneNumber: '444444', Email: 'four@four' },
 	];
 }
 

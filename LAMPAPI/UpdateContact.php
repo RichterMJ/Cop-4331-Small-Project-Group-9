@@ -17,9 +17,11 @@ if ($conn->connect_error) {
     $stmt->execute();
 
 
-    # maybe add a check to see rows affected in case we update info to be the same as a different contact
-    
-    returnNoError();	
+    if ($stmt->affected_rows == 1) {
+        returnNoError();
+    } else {
+        returnWithError('Could not update user with credentials: ' . $name . ', ' . $phoneNumber . ', ' . $email . ', ' . $userId);
+    }	
 
     $stmt->close();
     $conn->close();

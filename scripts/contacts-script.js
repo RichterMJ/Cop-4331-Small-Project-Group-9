@@ -49,9 +49,13 @@ function convertContactsToTable(contacts) {
     `;
 }
 
+function generateContactHtmlId(ContactID) {
+	return `contact_row_${ContactID}`;
+}
+
 function convertContactToTableRow(contact) {
 	return `
-		<div class="contacts row p-1">
+		<div id="${generateContactHtmlId(contact.ID)}" class="contacts row p-1">
 			<div class="col-2">${contact.Name}</div>
 			<div class="col-2">${contact.PhoneNumber}</div>
 			<div class="col-4">${contact.Email}</div>
@@ -146,7 +150,9 @@ function editContact(contact) {
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="updateContact(${contact.ID})">Edit contact</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="updateContact(${contact.ID})">Edit</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="cancelEditContact(${contact.ID})">Cancel</button>
+
                 <span id="addContactResult"></span>
             </form>
     `;
@@ -185,8 +191,13 @@ async function updateContact(ContactID) {
 	} else {
 		searchContact(latestSearchQuery);
 		document.getElementById('editContactFormGoesHere').innerHTML = '';
-		document.getElementById('searchResults').scrollIntoView({ block: 'center', behavior: 'smooth' });
+		document.getElementById(generateContactHtmlId(ContactID)).scrollIntoView({ block: 'center', behavior: 'smooth' });
 	}
+}
+
+function cancelEditContact(ContactID) {
+	document.getElementById('editContactFormGoesHere').innerHTML = '';
+	document.getElementById(generateContactHtmlId(ContactID)).scrollIntoView({ block: 'center', behavior: 'smooth' });
 }
 
 /* Call the API to delete a contact. Must supply `ContactID` as an argument. */
@@ -210,6 +221,22 @@ async function deleteContact(ContactID) {
 	}
 }
 
+/* Handle text input into the search bar. */
+async function handleSearchQueryInput() {
+	const searchQuery = document.getElementById('searchQuery').value;
+
+	if (searchQuery !== '') {
+		await searchContact(searchQuery);
+	} else {
+		document.getElementById('searchResultsData').innerHTML = '';
+	}
+}
+
+/* Call the API to search for ALL contacts. */
+async function fetchAllContacts() {
+	await searchContact('');
+}
+
 /* Call the API to search for contacts. Can either supply the search term or will automatically get from the DOM. */
 async function searchContact(search) {
 
@@ -224,16 +251,16 @@ async function searchContact(search) {
 	});
 
 	if (!res.ok) {
-		document.getElementById('searchResults').innerHTML = 'There was an error connecting to the server, try again later.';
+		document.getElementById('searchResultsData').innerHTML = 'There was an error connecting to the server, try again later.';
 	}
 
 	const resJson = await res.json();
 
 	if (resJson.error !== '') {
-		document.getElementById('searchResults').innerHTML = resJson.error;
+		document.getElementById('searchResultsData').innerHTML = resJson.error;
 	} else {
 		latestSearchResults = resJson.results;
-		document.getElementById('searchResults').innerHTML = convertContactsToTable(resJson.results);
+		document.getElementById('searchResultsData').innerHTML = resJson.results.map(convertContactToTableRow).join('');
 	}
 
 }

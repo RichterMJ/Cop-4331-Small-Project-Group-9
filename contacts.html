@@ -35,7 +35,7 @@
 		<!-- Search bar. -->
 		<section class="">
 			<form class="form-inline p-3">
-				<input id="searchQuery" class="form-control w-100" type="search" placeholder="Search Contacts" aria-label="Search" autofocus oninput="searchContact()">
+				<input id="searchQuery" class="form-control w-100" type="search" placeholder="Search Contacts" aria-label="Search" autofocus oninput="handleSearchQueryInput()">
 			</form>
 		</section>
 
@@ -59,7 +59,7 @@
 		</div>
 
 		<!-- Main body. -->
-		<section class="px-sm-5">
+		<section class="px-xs-0 px-lg-5">
 
 			<!-- Error messages when adding contacts. -->
 			<span id="addContactResult"></span>
@@ -67,21 +67,37 @@
 			<div class="row equal justify-content-center">
 
 				<!-- Create contact. -->
-				<div class="panel col-xs-12 col-sm-4 text-center">
+				<div class="panel col-xs-12 col-sm-2 text-center">
+
+					<!-- Search all button. -->
+					<button class="btn btn-primary mx-sm-2 mx-md-5 mt-sm-5" type="button" onclick="">
+						Fetch all contacts
+					</button>
 
 					<!-- Create contact button. -->
-					<button class="btn btn-primary m-5" type="button" data-bs-toggle="collapse" data-bs-target="#createContactFormContainer" aria-expanded="false" aria-controls="createContactFormContainer">
-						+ Add a contact
+					<button class="btn btn-primary mx-sm-2 mx-md-5 my-sm-5" type="button" data-bs-toggle="collapse" data-bs-target="#createContactFormContainer" aria-expanded="false" aria-controls="createContactFormContainer">
+						Create new contact
 					</button>
 
 
 				</div>
 
 				<!-- Search contacts results. -->
-				<div class="panel col-xs-12 col-sm-8">
+				<div class="panel col-xs-12 col-sm-10">
 
 					<!-- Search contacts results; table. -->
 					<div id="searchResults">
+						<div class="container text-center p-5 px-2">
+							<div class="row p-1">
+								<div class="col-2">Name</div>
+								<div class="col-2">Phone #</div>
+								<div class="col-4">Email</div>
+								<div class="col-2 pt-2"></div>
+								<div class="col-2 pt-2"></div>
+							</div>
+							<hr>
+							<div id="searchResultsData"></div>
+						</div>
 					</div>
 
 				</div>

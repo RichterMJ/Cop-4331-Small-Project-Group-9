@@ -18,7 +18,7 @@ if ($conn->connect_error) {
     $stmt->bind_param("ssss",$firstName, $lastName, $login, $pass);
     $stmt->execute();
 
-    if ($stmt->affected_rows == 1) {
+    if ($stmt->affected_rows >= 1) {
       returnNoError();
     } else {
       returnWithError('Username ' . $login . ' is already taken.');

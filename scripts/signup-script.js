@@ -47,8 +47,6 @@ async function signUp() {
     const Password = document.getElementById('password').value;
     const PasswordRepeat = document.getElementById('password-repeat').value;
 
-	console.log(JSON.stringify({ FirstName, LastName, Login, Password, PasswordRepeat }));
-
 	let anyBlank = false;
 	for (const htmlId of ['firstName', 'lastName', 'username', 'password']) {
 		handleBlankCheck(htmlId);
@@ -70,7 +68,7 @@ async function signUp() {
 
     const res = await fetch('/LAMPAPI/CreateUser.php', {
         method: 'POST',
-		body: { FirstName, LastName, Login, Password: md5(Password) },
+		body: JSON.stringify({ FirstName, LastName, Login, Password: md5(Password) }),
     });
 
     if (!res.ok) {

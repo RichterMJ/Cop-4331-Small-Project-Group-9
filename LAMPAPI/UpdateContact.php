@@ -20,7 +20,7 @@ if ($conn->connect_error) {
     if ($stmt->affected_rows == 1) {
         returnNoError();
     } else {
-        returnWithError('Could not update user with credentials: ' . $name . ', ' . $phoneNumber . ', ' . $email . ', ' . $userId);
+        returnWithError('Could not update user with credentials: ' . $inData["Name"] . ', ' . $inData["PhoneNumber"] . ', ' . $inData["Email"]);
     }	
 
     $stmt->close();

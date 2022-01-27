@@ -28,8 +28,11 @@ async function signUp() {
 
 	if (password !== passwordRepeat) {
 		complainAboutMismatchedPasswords();
+		document.getElementById('signupResult').innerHTML = 'Passwords do not match!';
 		return;
 	}
+
+	document.getElementById('signupResult').innerHTML = '';
 
     const res = await fetch('/LAMPAPI/CreateUser.php', {
         method: 'POST',

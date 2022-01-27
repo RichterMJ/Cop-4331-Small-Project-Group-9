@@ -3,67 +3,7 @@ html body {
 }
 
 section {
-    padding: 2em 0 0 0;
-}
-
-.forms {
-    margin: 2em auto;
-    width: 50%;
-    letter-spacing: 0.1em;
-    border: 1px solid rgba(0, 0, 0, 0.329);
-	background: #fee076;
-}
-
-.forms .form-group label {
-    margin: 0 0 .5em 0;
-}
-
-:root {
-
+	padding: 2em 0 0 0;
 }
 
 
-/******************************************************************************
- * Index.html (login) specific stuff.
- ******************************************************************************/
-
-#login-form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 30%;
-}
-
-#login-form .btn {
-	color: #F3F8F2;
-}
-
-
-/******************************************************************************
- * Signup.html specific stuff.
- ******************************************************************************/
-
-#signup-button a {
-    color: inherit;
-    text-decoration: none;
-}
-
-
-/******************************************************************************
- * Contacts.html specific stuff.
- ******************************************************************************/
-
-#redirect-button a {
-	text-decoration: none;
-	color: inherit;
-}
-
-.contacts:nth-child(odd) {
-	background-color: #949494;
-}
-
-#searchResults {
-	margin: 2em auto;
-    letter-spacing: 0.1em;
-}

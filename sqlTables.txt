@@ -10,6 +10,9 @@ CREATE TABLE `COP4331`.`Users`
 	PRIMARY KEY (`ID`)
 ) ENGINE = InnoDB;
 
+ALTER TABLE Users ADD UNIQUE ‘unique_index’ (Login);
+
+
 CREATE TABLE `COP4331`.`Contacts` 
 ( 
 	`ID` INT NOT NULL AUTO_INCREMENT ,
@@ -21,3 +24,5 @@ CREATE TABLE `COP4331`.`Contacts`
 	`UserID` INT NOT NULL DEFAULT '0',
 	PRIMARY KEY (`ID`)
 ) ENGINE = InnoDB;
+
+ALTER TABLE Contacts ADD UNIQUE `unique_index` (Name, Email, PhoneNumber, UserID);

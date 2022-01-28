@@ -1,5 +1,3 @@
-const urlBase = 'http://cops43319.xyz';
-
 function complainAboutBlank(htmlId) {
 	document.getElementById('signupResult').innerHTML = 'One or more fields are blank.';
 	document.getElementById(htmlId).classList.add('is-invalid');
@@ -83,9 +81,6 @@ async function signUp() {
         document.getElementById('signupResult').innerHTML = resJson.error;
     } else {
         document.getElementById('signupResult').innerHTML = 'Sign up successful!';
-		setTimeout(() => {
-			window.location.href = '/';
-		}, 1000);
     }
 
     document.getElementById('firstName').value = '';

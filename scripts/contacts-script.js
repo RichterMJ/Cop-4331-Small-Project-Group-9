@@ -158,8 +158,7 @@ function editContact(contact) {
 				<span id="addContactResult"></span>
 			</form>
 	`;
-	
-	// if editFromX data is same as editToX don't trigger Update 
+ 
 	document.getElementById('editFromName').value = contact.Name;
 	document.getElementById('editFromPhonenumber').value = contact.PhoneNumber;
 	document.getElementById('editFromEmail').value = contact.Email;

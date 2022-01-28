@@ -7,3 +7,7 @@ section {
 }
 
 
+.errorMessage {
+	font-size: 1.2em;
+	color: #cc330d;
+}

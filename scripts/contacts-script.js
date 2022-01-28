@@ -272,25 +272,38 @@ async function addContact() {
 	const PhoneNumber = document.getElementById('phoneNumber').value;
 	const Email = document.getElementById('email').value;
 
-	const res = await fetch('/LAMPAPI/CreateContact.php', {
-		method: 'POST',
-		body: JSON.stringify({ Name, PhoneNumber, Email, UserID }),
-	});
-
-	if (!res.ok) {
-		document.getElementById('addContactResult').innerHTML = 'There was an error connecting to the server, try again later.';
+	// TODO: If name is blank throw error, otherwise create contact
+	if (Name == '') {
+		//error message
+		document.getElementById('errorMessage').innerHTML = '***Please enter a name***';
 	}
+	else {
+		const res = await fetch('/LAMPAPI/CreateContact.php', {
+			method: 'POST',
+			body: JSON.stringify({ Name, PhoneNumber, Email, UserID }),
+		});
 
-	const resJson = await res.json();
+		if (!res.ok) {
+			document.getElementById('addContactResult').innerHTML = 'There was an error connecting to the server, try again later.';
+		}
 
-	if (resJson.error !== '') {
-		document.getElementById('addContactResult').innerHTML = resJson.error;
-	} else {
-		document.getElementById('addContactResult').innerHTML = 'Sign up successful!';
+		const resJson = await res.json();
+
+		if (resJson.error !== '') {
+			document.getElementById('addContactResult').innerHTML = resJson.error;
+		} else {
+			document.getElementById('addContactResult').innerHTML = 'Sign up successful!';
+		}
+
+		document.getElementById('name').value = '';
+		document.getElementById('phoneNumber').value = '';
+		document.getElementById('email').value = '';
 	}
+}
 
+function clearCreateContact(){
+	document.getElementById('errorMessage').innerHTML = '';
 	document.getElementById('name').value = '';
 	document.getElementById('phoneNumber').value = '';
 	document.getElementById('email').value = '';
 }
-

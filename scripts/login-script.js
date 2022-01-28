@@ -16,37 +16,41 @@ async function signIn() {
 
 	const login = document.getElementById('username').value;
 	const password = document.getElementById('password').value;
-
-	document.getElementById('loginResult').innerHTML = '';
-
-	const res = await fetch('/LAMPAPI/LoginUser.php', {
-		method: 'POST',
-		body: JSON.stringify({ Login: login, Password: md5(password) }),
-	});
-
-	if (!res.ok) {
-		document.getElementById('loginResult').innerHTML = 'There was an error connecting to the server, try again later.';
-	}
-
-	const resJson = await res.json();
-
-	if (resJson.error !== '') {
-
+	if (login == '') {
 		complainAboutIncorrectCredentials();
+	}
+	else {
+		document.getElementById('loginResult').innerHTML = '';
 
-		return;
-
-	} else {
-
-		uncomplainAboutIncorrectCredentials();
-
-		saveCookie({
-			UserID: resJson.id,
-			FirstName: resJson.firstName,
-			LastName: resJson.lastName
+		const res = await fetch('/LAMPAPI/LoginUser.php', {
+			method: 'POST',
+			body: JSON.stringify({ Login: login, Password: md5(password) }),
 		});
 
-		window.location.href = urlBase + '/contacts.html';
+		if (!res.ok) {
+			document.getElementById('loginResult').innerHTML = 'There was an error connecting to the server, try again later.';
+		}
+
+		const resJson = await res.json();
+
+		if (resJson.error !== '') {
+
+			complainAboutIncorrectCredentials();
+
+			return;
+
+		} else {
+
+			uncomplainAboutIncorrectCredentials();
+
+			saveCookie({
+				UserID: resJson.id,
+				FirstName: resJson.firstName,
+				LastName: resJson.lastName
+			});
+
+			window.location.href = urlBase + '/contacts.html';
+		}
 	}
 }
 

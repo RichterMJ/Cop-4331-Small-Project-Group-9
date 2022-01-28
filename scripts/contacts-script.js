@@ -158,7 +158,8 @@ function editContact(contact) {
 				<span id="addContactResult"></span>
 			</form>
 	`;
-
+	
+	// if editFromX data is same as editToX don't trigger Update 
 	document.getElementById('editFromName').value = contact.Name;
 	document.getElementById('editFromPhonenumber').value = contact.PhoneNumber;
 	document.getElementById('editFromEmail').value = contact.Email;
@@ -274,10 +275,23 @@ async function addContact() {
 	const PhoneNumber = document.getElementById('phoneNumber').value;
 	const Email = document.getElementById('email').value;
 
+	document.getElementById('errorMessage').innerHTML = '';
+	document.getElementById('name').classList.remove('is-invalid');
+	document.getElementById('phoneNumber').classList.remove('is-invalid');
+	document.getElementById('email').classList.remove('is-invalid');
+
 	// TODO: If name is blank throw error, otherwise create contact
 	if (Name == '') {
 		//error message
 		document.getElementById('errorMessage').innerHTML = '***Please enter a name***';
+		// add same invalid display login page has
+		document.getElementById('name').classList.add('is-invalid');
+		
+		if (PhoneNumber == '')
+			document.getElementById('phoneNumber').classList.add('is-invalid');
+		
+		if (Email == '')
+			document.getElementById('email').classList.add('is-invalid');
 	}
 	else {
 		const res = await fetch('/LAMPAPI/CreateContact.php', {
@@ -297,9 +311,9 @@ async function addContact() {
 			document.getElementById('addContactResult').innerHTML = 'Sign up successful!';
 		}
 
-		document.getElementById('name').value = '';
-		document.getElementById('phoneNumber').value = '';
-		document.getElementById('email').value = '';
+		Name.value = '';
+		PhoneNumber.value = '';
+		Email.value = '';
 	}
 }
 
@@ -308,4 +322,8 @@ function clearCreateContact(){
 	document.getElementById('name').value = '';
 	document.getElementById('phoneNumber').value = '';
 	document.getElementById('email').value = '';
+	// maybe need?
+	document.getElementById('name').classList.remove('is-invalid');
+	document.getElementById('phoneNumber').classList.remove('is-invalid');
+	document.getElementById('email').classList.remove('is-invalid');
 }

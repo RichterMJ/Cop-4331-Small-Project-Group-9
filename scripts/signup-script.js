@@ -24,11 +24,15 @@ function handleBlankCheck(htmlId) {
 
 function complainAboutMismatchedPasswords() {
 	document.getElementById('passwordRepeatComplainMismatched').innerHTML = 'Passwords do not match.';
+	document.getElementById('passwordRepeatComplainMismatched').classList.add('d-block');
+	document.getElementById('passwordRepeatComplainMismatched').classList.remove('d-none');
 	document.getElementById('passwordRepeat').classList.add('is-invalid');
 }
 
 function uncomplainAboutMismatchedPasswords() {
 	document.getElementById('passwordRepeatComplainMismatched').innerHTML = '';
+	document.getElementById('passwordRepeatComplainMismatched').classList.add('d-none');
+	document.getElementById('passwordRepeatComplainMismatched').classList.remove('d-block');
 	document.getElementById('passwordRepeat').classList.remove('is-invalid');
 }
 
@@ -84,6 +88,9 @@ async function signUp() {
         document.getElementById('signupResult').innerHTML = resJson.error;
     } else {
         document.getElementById('signupResult').innerHTML = 'Sign up successful!';
+		setTimeout(() => {
+			window.location.href = '/';
+		}, 1200);
     }
 
     document.getElementById('firstName').value = '';

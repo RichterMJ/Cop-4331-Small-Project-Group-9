@@ -39,7 +39,7 @@
 												<i class="fas fa-user fa-lg me-3 fa-fw"></i>
 												<div class="form-outline flex-fill mb-0">
 													<label class="form-label" for="firstName">First name</label>
-													<input type="text" id="firstName" class="form-control" oninput="handleBlankCheck('firstName')" />
+													<input tabindex="1" type="text" id="firstName" class="form-control" oninput="handleBlankCheck('firstName')" autofocus />
 													<label class="form-label d-none" for="firstName" id="firstNameComplainBlank"></label>
 												</div>
 											</div>
@@ -48,7 +48,7 @@
 												<i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
 												<div class="form-outline flex-fill mb-0">
 													<label class="form-label" for="lastName">Last name</label>
-													<input type="email" id="lastName" class="form-control" oninput="handleBlankCheck('lastName')" />
+													<input tabindex="2" type="email" id="lastName" class="form-control" oninput="handleBlankCheck('lastName')" />
 													<label class="form-label d-none" for="lastName" id="lastNameComplainBlank"></label>
 												</div>
 											</div>
@@ -57,7 +57,7 @@
 												<i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
 												<div class="form-outline flex-fill mb-0">
 													<label class="form-label" for="username">Username</label>
-													<input type="email" id="username" class="form-control" oninput="handleBlankCheck('username')" />
+													<input tabindex="3" type="email" id="username" class="form-control" oninput="handleBlankCheck('username')" />
 													<label class="form-label d-none" for="username" id="usernameComplainBlank"></label>
 												</div>
 											</div>
@@ -66,7 +66,7 @@
 												<i class="fas fa-lock fa-lg me-3 fa-fw"></i>
 												<div class="form-outline flex-fill mb-0">
 													<label class="form-label" for="password">Password</label>
-													<input type="password" id="password" class="form-control" oninput="handleBlankCheck('password')" />
+													<input tabindex="4" type="password" id="password" class="form-control" oninput="handleBlankCheck('password')" />
 													<label class="form-label d-none" for="password" id="passwordComplainBlank"></label>
 												</div>
 											</div>
@@ -75,7 +75,7 @@
 												<i class="fas fa-key fa-lg me-3 fa-fw"></i>
 												<div class="form-outline flex-fill mb-0">
 													<label class="form-label" for="passwordRepeat">Repeat your password</label>
-													<input type="password" id="passwordRepeat" class="form-control" oninput="handlePasswordRepeatInput()" />
+													<input tabindex="5" type="password" id="passwordRepeat" class="form-control" oninput="handlePasswordRepeatInput()" />
 													<label class="form-label d-none" for="passwordRepeat" id="passwordRepeatComplainMismatched"></label>
 												</div>
 											</div>
@@ -97,7 +97,7 @@
 											-->
 
 											<div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-												<button id="redirect-button" type="submit" class="btn btn-primary btn-lg btn-block" onclick="signUp()">Register</button>
+												<button tabindex="6" id="redirect-button" type="submit" class="btn btn-primary btn-lg btn-block" onclick="signUp()">Register</button>
 												<span id="signupResult" class="p-3"></span>
 											</div>
 

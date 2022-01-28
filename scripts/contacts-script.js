@@ -14,7 +14,7 @@ window.onload = function () {
 		FirstName = 'MR';
 		LastName = 'DEBUG';
 
-		document.getElementById('searchResults').innerHTML = convertContactsToTable(getMockContacts());
+		document.getElementById('searchResultsData').innerHTML = getMockContacts().map(convertContactToTableRow).join('');
 	} else {
 		// So secure <3
 		UserID = parseInt(getCookieVal('UserID'));
@@ -46,35 +46,37 @@ function convertContactsToTable(contacts) {
 				${contacts.map(convertContactToTableRow).join('')}
 			</div>
 		</div>
-    `;
+	`;
 }
 
 function generateContactHtmlId(ContactID) {
 	return `contact_row_${ContactID}`;
 }
 
+// <button type="button" class="btn btn-dark btn-md btn-block" data-bs-toggle="collapse" data-bs-target="#createContactFormContainer" aria-expanded="false" aria-controls="createContactFormContainer" onclick="clearCreateContact()">Cancel</button>
+
 function convertContactToTableRow(contact) {
 	return `
 		<div id="${generateContactHtmlId(contact.ID)}" class="contacts row p-1">
-			<div class="col-2">${contact.Name}</div>
-			<div class="col-2">${contact.PhoneNumber}</div>
-			<div class="col-4">${contact.Email}</div>
-			<div class="col-2 py-2">${generateUpdateButton(contact)}</div>
-			<div class="col-2 py-2">${generateDeleteButton(contact)}</div>
+			<div class="col-5 col-sm-2">${contact.Name}</div>
+			<div class="col-2 col-sm-2">${contact.PhoneNumber}</div>
+			<div class="col-5 col-sm-4">${contact.Email}</div>
+			<div class="offset-2 col-4 offset-sm-0 col-sm-2 py-2">${generateUpdateButton(contact)}</div>
+			<div class="col-4 offset-sm-0 col-sm-2 py-2">${generateDeleteButton(contact)}</div>
 		</div>
-    `;
+	`;
 }
 
 function generateUpdateButton(contact) {
 	return `
 		<button class="btn btn-sm btn-block btn-outline-light btn-info" onclick='editContact(${JSON.stringify(contact)})'>Edit</button>
-    `;
+	`;
 }
 
 function generateDeleteButton(contact) {
 	return `
 		<button class="btn btn-sm btn-block btn-outline-light btn-danger" onclick="deleteContact(${contact.ID})">Delete</button>
-    `;
+	`;
 }
 
 function getMockContacts() {
@@ -104,58 +106,58 @@ function getMockContacts() {
 
 function editContact(contact) {
 	document.getElementById('editContactFormGoesHere').innerHTML = `
-            <!-- Edit contact form. -->
-            <form id="editContactForm" class="forms container text-center py-5">
-                <h2 class="m-3">Edit Contact Form</h2>
+			<!-- Edit contact form. -->
+			<form id="editContactForm" class="forms container text-center py-5">
+				<h2 class="m-3">Edit Contact Form</h2>
 
-                <div class="form-group mb-3 text-left">
-                    <label for="editFromName">Name</label>
+				<div class="form-group mb-3 text-left">
+					<label for="editFromName">Name</label>
 
-                    <div class="form-group row">
-                        <label for="editFromName" class="col-sm-2 col-form-label">from</label>
-                        <div class="col-sm-10"><input disabled type="text" class="form-control" id="editFromName" placeholder="Name" autofocus></div>
-                    </div>
+					<div class="form-group row">
+						<label for="editFromName" class="col-sm-2 col-form-label">from</label>
+						<div class="col-sm-10"><input disabled type="text" class="form-control" id="editFromName" placeholder="Name" autofocus></div>
+					</div>
 
-                    <div class="form-group row">
-                        <label for="editToName" class="col-sm-2 col-form-label">to</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" id="editToName" placeholder="Name" autofocus></div>
-                    </div>
-                </div>
+					<div class="form-group row">
+						<label for="editToName" class="col-sm-2 col-form-label">to</label>
+						<div class="col-sm-10"><input type="text" class="form-control" id="editToName" placeholder="Name" autofocus></div>
+					</div>
+				</div>
 
-                <div class="form-group mb-3 text-left">
-                    <label for="editFromPhonenumber">Phone Number</label>
+				<div class="form-group mb-3 text-left">
+					<label for="editFromPhonenumber">Phone Number</label>
 
-                    <div class="form-group row">
-                        <label for="editFromPhonenumber" class="col-sm-2 col-form-label">from</label>
-                        <div class="col-sm-10"><input disabled type="text" class="form-control" id="editFromPhonenumber" placeholder="Phone Number" autofocus></div>
-                    </div>
+					<div class="form-group row">
+						<label for="editFromPhonenumber" class="col-sm-2 col-form-label">from</label>
+						<div class="col-sm-10"><input disabled type="text" class="form-control" id="editFromPhonenumber" placeholder="Phone Number" autofocus></div>
+					</div>
 
-                    <div class="form-group row">
-                        <label for="editToPhonenumber" class="col-sm-2 col-form-label">to</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" id="editToPhonenumber" placeholder="Phone Number" autofocus></div>
-                    </div>
-                </div>
+					<div class="form-group row">
+						<label for="editToPhonenumber" class="col-sm-2 col-form-label">to</label>
+						<div class="col-sm-10"><input type="text" class="form-control" id="editToPhonenumber" placeholder="Phone Number" autofocus></div>
+					</div>
+				</div>
 
-                <div class="form-group mb-3 text-left">
-                    <label for="editFromEmail">Email</label>
+				<div class="form-group mb-3 text-left">
+					<label for="editFromEmail">Email</label>
 
-                    <div class="form-group row">
-                        <label for="editFromEmail" class="col-sm-2 col-form-label">from</label>
-                        <div class="col-sm-10"><input disabled type="text" class="form-control" id="editFromEmail" placeholder="Email" autofocus></div>
-                    </div>
+					<div class="form-group row">
+						<label for="editFromEmail" class="col-sm-2 col-form-label">from</label>
+						<div class="col-sm-10"><input disabled type="text" class="form-control" id="editFromEmail" placeholder="Email" autofocus></div>
+					</div>
 
-                    <div class="form-group row">
-                        <label for="editToEmail" class="col-sm-2 col-form-label">to</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" id="editToEmail" placeholder="Email" autofocus></div>
-                    </div>
-                </div>
+					<div class="form-group row">
+						<label for="editToEmail" class="col-sm-2 col-form-label">to</label>
+						<div class="col-sm-10"><input type="text" class="form-control" id="editToEmail" placeholder="Email" autofocus></div>
+					</div>
+				</div>
 
-                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="updateContact(${contact.ID})">Edit</button>
-                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="cancelEditContact(${contact.ID})">Cancel</button>
+				<button type="button" class="btn btn-primary btn-outline-light btn-lg btn-block" onclick="updateContact(${contact.ID})">Edit</button>
+				<button type="button" class="btn btn-info btn-outline-light btn-lg btn-block" onclick="cancelEditContact(${contact.ID})">Cancel</button>
 
-                <span id="addContactResult"></span>
-            </form>
-    `;
+				<span id="addContactResult"></span>
+			</form>
+	`;
 
 	document.getElementById('editFromName').value = contact.Name;
 	document.getElementById('editFromPhonenumber').value = contact.PhoneNumber;

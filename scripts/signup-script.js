@@ -1,10 +1,14 @@
 function complainAboutBlank(htmlId) {
-	document.getElementById('signupResult').innerHTML = 'One or more fields are blank.';
+	document.getElementById(`${htmlId}ComplainBlank`).innerHTML = 'Field cannot be blank.';
+	document.getElementById(`${htmlId}ComplainBlank`).classList.add('d-block');
+	document.getElementById(`${htmlId}ComplainBlank`).classList.remove('d-none');
 	document.getElementById(htmlId).classList.add('is-invalid');
 }
 
 function uncomplainAboutBlank(htmlId) {
-	document.getElementById('signupResult').innerHTML = '';
+	document.getElementById(`${htmlId}ComplainBlank`).innerHTML = '';
+	document.getElementById(`${htmlId}ComplainBlank`).classList.add('d-none');
+	document.getElementById(`${htmlId}ComplainBlank`).classList.remove('d-block');
 	document.getElementById(htmlId).classList.remove('is-invalid');
 }
 
@@ -19,18 +23,18 @@ function handleBlankCheck(htmlId) {
 }
 
 function complainAboutMismatchedPasswords() {
-		document.getElementById('signupResult').innerHTML = 'Passwords do not match.';
-	document.getElementById('password-repeat').classList.add('is-invalid');
+	document.getElementById('passwordRepeatComplainMismatched').innerHTML = 'Passwords do not match.';
+	document.getElementById('passwordRepeat').classList.add('is-invalid');
 }
 
 function uncomplainAboutMismatchedPasswords() {
-	document.getElementById('signupResult').innerHTML = '';
-	document.getElementById('password-repeat').classList.remove('is-invalid');
+	document.getElementById('passwordRepeatComplainMismatched').innerHTML = '';
+	document.getElementById('passwordRepeat').classList.remove('is-invalid');
 }
 
 function handlePasswordRepeatInput() {
     const password = document.getElementById('password').value;
-    const passwordRepeat = document.getElementById('password-repeat').value;
+    const passwordRepeat = document.getElementById('passwordRepeat').value;
 
 	if (password !== passwordRepeat) {
 		complainAboutMismatchedPasswords();
@@ -45,7 +49,7 @@ async function signUp() {
     const LastName = document.getElementById('lastName').value;
     const Login = document.getElementById('username').value;
     const Password = document.getElementById('password').value;
-    const PasswordRepeat = document.getElementById('password-repeat').value;
+    const PasswordRepeat = document.getElementById('passwordRepeat').value;
 
 	let anyBlank = false;
 	for (const htmlId of ['firstName', 'lastName', 'username', 'password']) {
@@ -55,7 +59,6 @@ async function signUp() {
 		}
 	}
 	if (anyBlank) {
-		document.getElementById('signupResult').innerHTML = 'One or more fields are blank.';
 		return;
 	}
 

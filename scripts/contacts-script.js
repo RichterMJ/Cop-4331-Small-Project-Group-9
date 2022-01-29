@@ -331,12 +331,11 @@ async function addContact() {
 }
 
 function clearCreateContact(){
-	document.getElementById('errorMessage').innerHTML = '';
-	document.getElementById('name').value = '';
-	document.getElementById('phoneNumber').value = '';
-	document.getElementById('email').value = '';
-	// maybe need?
+	document.getElementById('createErrorMessage').innerHTML = '';
 	document.getElementById('name').classList.remove('is-invalid');
 	document.getElementById('phoneNumber').classList.remove('is-invalid');
 	document.getElementById('email').classList.remove('is-invalid');
+	document.getElementById('name').value = '';
+	document.getElementById('phoneNumber').value = '';
+	document.getElementById('email').value = '';
 }

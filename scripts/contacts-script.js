@@ -6,7 +6,7 @@ let UserID, FirstName, LastName;
 let latestSearchQuery = '';
 let latestSearchResults = null;
 
-const DEBUG = true;
+const DEBUG = false;
 
 window.onload = function () {
 	if (DEBUG) {

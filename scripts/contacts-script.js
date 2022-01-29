@@ -336,7 +336,7 @@ function clearCreateContact(){
 	document.getElementById('phoneNumber').value = '';
 	document.getElementById('email').value = '';
 	// maybe need?
-	// document.getElementById('name').classList.remove('is-invalid');
-	// document.getElementById('phoneNumber').classList.remove('is-invalid');
-	// document.getElementById('email').classList.remove('is-invalid');
+	document.getElementById('name').classList.remove('is-invalid');
+	document.getElementById('phoneNumber').classList.remove('is-invalid');
+	document.getElementById('email').classList.remove('is-invalid');
 }

@@ -327,7 +327,6 @@ async function addContact() {
 		// Collapse on successful adding of new contact
 		// document.getElementById('createContactFormContainer').innerHTML = '';
 		// document.getElementById('createContactForm').scrollIntoView({ block: 'center', behavior: 'smooth' });
-		clearCreateContact();
 	}
 }
 

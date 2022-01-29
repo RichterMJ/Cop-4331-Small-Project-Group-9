@@ -6,7 +6,7 @@ let UserID, FirstName, LastName;
 let latestSearchQuery = '';
 let latestSearchResults = null;
 
-const DEBUG = false;
+const DEBUG = true;
 
 window.onload = function () {
 	if (DEBUG) {
@@ -109,7 +109,7 @@ function editContact(contact) {
 			<!-- Edit contact form. -->
 			<form id="editContactForm" class="forms container text-center py-5">
 				<h2 class="m-3">Edit Contact Form</h2>
-
+				<span id="editErrorMessage" class="error-message"></span>
 				<div class="form-group mb-3 text-left">
 					<label for="editFromName">Name</label>
 
@@ -177,23 +177,40 @@ async function updateContact(ContactID) {
 	const PhoneNumber = document.getElementById('editToPhonenumber').value;
 	const Email = document.getElementById('editToEmail').value;
 
-	const res = await fetch('LAMPAPI/UpdateContact.php', {
-		method: 'POST',
-		body: JSON.stringify({ ContactID, Name, PhoneNumber, Email }),
-	});
+	const fromInfo = {
+		name: document.getElementById('editFromName').value,
+		number: document.getElementById('editFromPhonenumber').value,
+		email: document.getElementById('editFromEmail').value
+	};
 
-	if (!res.ok) {
-		document.getElementById('editResults').innerHTML = 'There was an error connecting to the server, try again later. No contacts deleted.';
+	const toInfo = {
+		name: Name,
+		number: PhoneNumber,
+		email: Email
+	};
+
+	if(JSON.stringify(fromInfo) === JSON.stringify(toInfo)) {
+		cancelEditContact(ContactID);
 	}
+	else {
+		const res = await fetch('LAMPAPI/UpdateContact.php', {
+			method: 'POST',
+			body: JSON.stringify({ ContactID, Name, PhoneNumber, Email }),
+		});
 
-	const resJson = await res.json();
+		if (!res.ok) {
+			document.getElementById('editErrorMessage').innerHTML = 'There was an error connecting to the server, try again later. No contacts deleted.';
+		}
 
-	if (resJson.error !== '') {
-		document.getElementById('editResults').innerHTML = resJson.error;
-	} else {
-		searchContact(latestSearchQuery);
-		document.getElementById('editContactFormGoesHere').innerHTML = '';
-		document.getElementById(generateContactHtmlId(ContactID)).scrollIntoView({ block: 'center', behavior: 'smooth' });
+		const resJson = await res.json();
+
+		if (resJson.error !== '') {
+			document.getElementById('editResults').innerHTML = resJson.error;
+		} else {
+			searchContact(latestSearchQuery);
+			document.getElementById('editContactFormGoesHere').innerHTML = '';
+			document.getElementById(generateContactHtmlId(ContactID)).scrollIntoView({ block: 'center', behavior: 'smooth' });
+		}
 	}
 }
 
@@ -274,15 +291,10 @@ async function addContact() {
 	const PhoneNumber = document.getElementById('phoneNumber').value;
 	const Email = document.getElementById('email').value;
 
-	document.getElementById('errorMessage').innerHTML = '';
-	document.getElementById('name').classList.remove('is-invalid');
-	document.getElementById('phoneNumber').classList.remove('is-invalid');
-	document.getElementById('email').classList.remove('is-invalid');
-
 	// TODO: If name is blank throw error, otherwise create contact
 	if (Name == '') {
 		//error message
-		document.getElementById('errorMessage').innerHTML = '***Please enter a name***';
+		document.getElementById('createErrorMessage').innerHTML = '***Please enter a name***';
 		// add same invalid display login page has
 		document.getElementById('name').classList.add('is-invalid');
 		
@@ -313,6 +325,10 @@ async function addContact() {
 		Name.value = '';
 		PhoneNumber.value = '';
 		Email.value = '';
+
+		// Collapse on successful adding of new contact
+		// document.getElementById('createContactFormContainer').innerHTML = '';
+		// document.getElementById('createContactForm').scrollIntoView({ block: 'center', behavior: 'smooth' });
 	}
 }
 

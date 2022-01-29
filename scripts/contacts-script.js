@@ -189,6 +189,7 @@ async function updateContact(ContactID) {
 		email: Email
 	};
 
+	// If there is no change in info the edit form closes.
 	if(JSON.stringify(fromInfo) === JSON.stringify(toInfo)) {
 		cancelEditContact(ContactID);
 	}
@@ -291,11 +292,8 @@ async function addContact() {
 	const PhoneNumber = document.getElementById('phoneNumber').value;
 	const Email = document.getElementById('email').value;
 
-	// TODO: If name is blank throw error, otherwise create contact
 	if (Name == '') {
-		//error message
 		document.getElementById('createErrorMessage').innerHTML = '***Please enter a name***';
-		// add same invalid display login page has
 		document.getElementById('name').classList.add('is-invalid');
 		
 		if (PhoneNumber == '')
@@ -338,7 +336,7 @@ function clearCreateContact(){
 	document.getElementById('phoneNumber').value = '';
 	document.getElementById('email').value = '';
 	// maybe need?
-	document.getElementById('name').classList.remove('is-invalid');
-	document.getElementById('phoneNumber').classList.remove('is-invalid');
-	document.getElementById('email').classList.remove('is-invalid');
+	// document.getElementById('name').classList.remove('is-invalid');
+	// document.getElementById('phoneNumber').classList.remove('is-invalid');
+	// document.getElementById('email').classList.remove('is-invalid');
 }

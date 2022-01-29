@@ -37,7 +37,7 @@
 
 		<!-- Create contact form. -->
 		<div id="createContactFormContainer" class="collapse">
-			<form id="createContactForm" class="forms text-center px-5 py-3">
+			<form id="createContactForm" class="forms text-center px-5 py-3" onsubmit="return false;">
 				<h3 class="m-3">Create New Contact</h3>
 				<span id="createErrorMessage" class="error-message"></span>
 				<div class="mb-3">
@@ -49,7 +49,7 @@
 				<div class="mb-3">
 					<input type="email" class="form-control" id="email" placeholder="Email">
 				</div>
-				<button type="button" class="btn btn-dark btn-outline-light btn-md btn-block" onclick="addContact()">Add</button>
+				<button type="submit" class="btn btn-dark btn-outline-light btn-md btn-block" onclick="addContact()">Add</button>
 				<button type="button" class="btn btn-info btn-outline-light btn-md btn-block" data-bs-toggle="collapse" data-bs-target="#createContactFormContainer" aria-expanded="false" aria-controls="createContactFormContainer" onclick="clearCreateContact()">Cancel</button>
 				<span id="addContactResult"></span>
 			</form>

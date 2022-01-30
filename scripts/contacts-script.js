@@ -323,10 +323,6 @@ async function addContact() {
 		Name.value = '';
 		PhoneNumber.value = '';
 		Email.value = '';
-
-		// Collapse on successful adding of new contact
-		// document.getElementById('createContactFormContainer').innerHTML = '';
-		// document.getElementById('createContactForm').scrollIntoView({ block: 'center', behavior: 'smooth' });
 	}
 }
 

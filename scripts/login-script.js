@@ -1,9 +1,13 @@
 const urlBase = 'http://cops43319.xyz';
 
-function complainAboutIncorrectCredentials() {
+function complainAboutIncorrectCredentials(login, password) {
 	document.getElementById('loginResult').innerHTML = 'Invalid username and/or password, please try again';
-	document.getElementById('username').classList.add('is-invalid');
-	document.getElementById('password').classList.add('is-invalid');
+
+	if(login == '')
+		document.getElementById('username').classList.add('is-invalid');
+		
+	if(password == '')
+		document.getElementById('password').classList.add('is-invalid');
 }
 
 function uncomplainAboutIncorrectCredentials() {
@@ -17,7 +21,7 @@ async function signIn() {
 	const login = document.getElementById('username').value;
 	const password = document.getElementById('password').value;
 	if (login == '') {
-		complainAboutIncorrectCredentials();
+		complainAboutIncorrectCredentials(login, password);
 	}
 	else {
 		document.getElementById('loginResult').innerHTML = '';

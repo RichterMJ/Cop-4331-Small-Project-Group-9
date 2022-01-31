@@ -298,7 +298,6 @@ async function addContact() {
 		err = true;
 	}
 
-		//fix this
 	if (err == true) {
 		// document.getElementById('createErrorMessage').innerHTML = '***Please enter a name***';
 
@@ -318,11 +317,6 @@ async function addContact() {
 			document.getElementById('email').classList.remove('is-invalid');
 
 	}
-	// else if (!validatePhoneNumber(PhoneNumber)) {
-	// 	// document.getElementById('createErrorMessage').innerHTML = '***Please enter a name***';
-	// 	document.getElementById('name').classList.remove('is-invalid');
-	// 	document.getElementById('phoneNumber').classList.add('is-invalid');
-	// }
 	else {
 		const res = await fetch('/LAMPAPI/CreateContact.php', {
 			method: 'POST',
@@ -348,9 +342,10 @@ async function addContact() {
 }
 
 function validatePhoneNumber(PhoneNumber) {
-	var phonePattern = /^\d{3}-\d{3}-\d{4}$/;
+	var phonePatternOne = /^\d{3}-\d{3}-\d{4}$/;
+	var phonePatternTwo = /^\d{10}$/
 
-	if (PhoneNumber.match(phonePattern)) {
+	if (PhoneNumber.match(phonePatternOne) || PhoneNumber.match(phonePatternTwo)) {
 		return true;
 	}
 

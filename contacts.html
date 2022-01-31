@@ -41,7 +41,7 @@
 				<h3 class="m-3">Create New Contact</h3>
 				<span id="createErrorMessage" class="error-message"></span>
 				<div class="mb-3">
-					<input type="text" class="form-control" id="name" placeholder="Name">
+					<input type="text" class="form-control" id="name" placeholder="Name" required>
 				</div>
 				<div class="mb-3">
 					<input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" id="phoneNumber" placeholder="Phone Number">
@@ -51,6 +51,7 @@
 				</div>
 				<button type="submit" class="btn btn-dark btn-outline-light btn-md btn-block" onclick="addContact()">Add</button>
 				<button type="button" class="btn btn-info btn-outline-light btn-md btn-block" data-bs-toggle="collapse" data-bs-target="#createContactFormContainer" aria-expanded="false" aria-controls="createContactFormContainer" onclick="clearCreateContact()">Cancel</button>
+				<br>
 				<span id="addContactResult"></span>
 			</form>
 		</div>

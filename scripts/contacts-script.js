@@ -292,16 +292,37 @@ async function addContact() {
 	const PhoneNumber = document.getElementById('phoneNumber').value;
 	const Email = document.getElementById('email').value;
 
-	if (Name == '') {
-		document.getElementById('createErrorMessage').innerHTML = '***Please enter a name***';
-		document.getElementById('name').classList.add('is-invalid');
-		
-		if (PhoneNumber == '')
-			document.getElementById('phoneNumber').classList.add('is-invalid');
-		
-		if (Email == '')
-			document.getElementById('email').classList.add('is-invalid');
+	let err = false;
+
+	if (Name == '' || !validatePhoneNumber(PhoneNumber) || !validateEmail(Email)) {
+		err = true;
 	}
+
+		//fix this
+	if (err == true) {
+		// document.getElementById('createErrorMessage').innerHTML = '***Please enter a name***';
+
+		if (Name == '') 
+			document.getElementById('name').classList.add('is-invalid');
+		else
+			document.getElementById('name').classList.remove('is-invalid');
+		
+		if (!validatePhoneNumber(PhoneNumber))
+			document.getElementById('phoneNumber').classList.add('is-invalid');
+		else
+		document.getElementById('phoneNumber').classList.remove('is-invalid');
+		
+		if (!validateEmail(Email))
+			document.getElementById('email').classList.add('is-invalid');
+		else
+			document.getElementById('email').classList.remove('is-invalid');
+
+	}
+	// else if (!validatePhoneNumber(PhoneNumber)) {
+	// 	// document.getElementById('createErrorMessage').innerHTML = '***Please enter a name***';
+	// 	document.getElementById('name').classList.remove('is-invalid');
+	// 	document.getElementById('phoneNumber').classList.add('is-invalid');
+	// }
 	else {
 		const res = await fetch('/LAMPAPI/CreateContact.php', {
 			method: 'POST',
@@ -309,7 +330,7 @@ async function addContact() {
 		});
 
 		if (!res.ok) {
-			document.getElementById('addContactResult').innerHTML = 'There was an error connecting to the server, try again later.';
+			document.getElementById('createErrorMessage').innerHTML = 'There was an error connecting to the server, try again later.';
 		}
 
 		const resJson = await res.json();
@@ -324,6 +345,26 @@ async function addContact() {
 		PhoneNumber.value = '';
 		Email.value = '';
 	}
+}
+
+function validatePhoneNumber(PhoneNumber) {
+	var phonePattern = /^\d{3}-\d{3}-\d{4}$/;
+
+	if (PhoneNumber.match(phonePattern)) {
+		return true;
+	}
+
+	return false;
+}
+
+function validateEmail(Email) {
+	var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+	if (Email.match(emailPattern)) {
+		return true;
+	}
+
+	return false;
 }
 
 function clearCreateContact(){

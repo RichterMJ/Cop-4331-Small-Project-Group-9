@@ -342,10 +342,10 @@ async function addContact() {
 }
 
 function validatePhoneNumber(PhoneNumber) {
-	var phonePatternOne = /^\d{3}-\d{3}-\d{4}$/;
+	// var phonePatternOne = /^\d{3}-\d{3}-\d{4}$/;
 	var phonePatternTwo = /^\d{10}$/
 
-	if (PhoneNumber.match(phonePatternOne) || PhoneNumber.match(phonePatternTwo)) {
+	if (PhoneNumber.match(phonePatternTwo)) {
 		return true;
 	}
 

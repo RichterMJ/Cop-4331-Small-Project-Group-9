@@ -294,7 +294,7 @@ async function addContact() {
 
 	let err = false;
 
-	if (Name == '' || !validatePhoneNumber(PhoneNumber) || !validateEmail(Email)) {
+	if (Name == '' || !validatePhoneNumber(PhoneNumber) || (!validateEmail(Email)  && Email !== '')) {
 		err = true;
 	}
 

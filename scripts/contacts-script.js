@@ -342,7 +342,6 @@ async function addContact() {
 		Name.value = '';
 		PhoneNumber.value = '';
 		Email.value = '';
-		clearCreateContact();
 	}
 }
 
@@ -368,7 +367,7 @@ async function addContact() {
 // }
 
 function clearCreateContact(){
-	document.getElementById('createErrorMessage').innerHTML = '';
+	// document.getElementById('createErrorMessage').innerHTML = '';
 	document.getElementById('name').classList.remove('is-invalid');
 	document.getElementById('phoneNumber').classList.remove('is-invalid');
 	document.getElementById('email').classList.remove('is-invalid');

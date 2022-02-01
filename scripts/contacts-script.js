@@ -345,7 +345,7 @@ async function addContact() {
 
 function isValidName(Name) {
 	// const namePattern = /^[a-zA-Z0-9 ]+$/;
-	const namePattern = /^[a-zA-Z0-9 ]*[A-Z0-9][A-Z0-9 ]+$/;
+	const namePattern = /^[a-zA-Z0-9 ]*[a-zA-Z0-9][a-zA-Z0-9 ]+$/;
 
 	return Name.match(namePattern);
 }

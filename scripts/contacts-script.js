@@ -310,16 +310,16 @@ async function addContact() {
 		document.getElementById('name').classList.add('is-invalid');
 		
 		// if (!validatePhoneNumber(PhoneNumber))
-		if (PhoneNumber == '')
-			document.getElementById('phoneNumber').classList.add('is-invalid');
-		else
-			document.getElementById('phoneNumber').classList.remove('is-invalid');
+		// if (PhoneNumber == '')
+		// 	document.getElementById('phoneNumber').classList.add('is-invalid');
+		// else
+		// 	document.getElementById('phoneNumber').classList.remove('is-invalid');
 		
-		// if (!validateEmail(Email))
-		if (Email == '')
-			document.getElementById('email').classList.add('is-invalid');
-		else
-			document.getElementById('email').classList.remove('is-invalid');
+		// // if (!validateEmail(Email))
+		// if (Email == '')
+		// 	document.getElementById('email').classList.add('is-invalid');
+		// else
+		// 	document.getElementById('email').classList.remove('is-invalid');
 	}
 	else {
 		const res = await fetch('/LAMPAPI/CreateContact.php', {

@@ -309,8 +309,6 @@ async function addContact() {
 		body: JSON.stringify({ Name, PhoneNumber, Email, UserID }),
 	});
 
-	uncomplainAboutBlank('name');
-
 	if (!res.ok) {
 		document.getElementById('addContactResult').innerHTML = 'There was an error connecting to the server, try again later.';
 	}
@@ -372,3 +370,14 @@ function uncomplainAboutBlank(htmlId) {
 	document.getElementById(`${htmlId}ComplainBlank`).classList.remove('d-block');
 	document.getElementById(htmlId).classList.remove('is-invalid');
 }
+
+function handleBlankCheck(htmlId) {
+    const content = document.getElementById(htmlId).value;
+
+	if (content === '') {
+		complainAboutBlank(htmlId);
+	} else {
+		uncomplainAboutBlank(htmlId);
+	}
+}
+

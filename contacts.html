@@ -41,8 +41,8 @@
 				<h3 class="m-3">Create New Contact</h3>
 				<span id="createErrorMessage" class="error-message"></span>
 				<div class="mb-3">
-					<input type="text" class="form-control" id="name" placeholder="Name" required>
-					<label class="form-label d-none" for="firstName" id="NameComplainBlank"></label>
+					<input type="text" class="form-control" id="name" placeholder="Name" oninput="handleBlankCheck('name')" required>
+					<label class="form-label d-none" for="firstName" id="nameComplainBlank"></label>
 				</div>
 				<div class="mb-3">
 					<input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">

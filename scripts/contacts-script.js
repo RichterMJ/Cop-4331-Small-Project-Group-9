@@ -342,6 +342,7 @@ async function addContact() {
 		Name.value = '';
 		PhoneNumber.value = '';
 		Email.value = '';
+		clearCreateContact();
 	}
 }
 

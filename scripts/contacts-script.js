@@ -292,30 +292,34 @@ async function addContact() {
 	const PhoneNumber = document.getElementById('phoneNumber').value;
 	const Email = document.getElementById('email').value;
 
-	let err = false;
+	// let err = false;
 
-	if (Name == '' || !validatePhoneNumber(PhoneNumber) || !validateEmail(Email)) {
-		err = true;
-	}
+	// if (Name == '' || !validatePhoneNumber(PhoneNumber) || !validateEmail(Email)) {
+	// 	err = true;
+	// }
 
-	if (err == true) {
+	// if (err == true) {
+	if (Name == '') {
 		// document.getElementById('createErrorMessage').innerHTML = '***Please enter a name***';
 
-		if (Name == '') 
-			document.getElementById('name').classList.add('is-invalid');
-		else
-			document.getElementById('name').classList.remove('is-invalid');
+		// if (Name == '') 
+		// 	document.getElementById('name').classList.add('is-invalid');
+		// else
+		// 	document.getElementById('name').classList.remove('is-invalid');
+
+		document.getElementById('name').classList.add('is-invalid');
 		
-		if (!validatePhoneNumber(PhoneNumber))
+		// if (!validatePhoneNumber(PhoneNumber))
+		if (PhoneNumber == '')
 			document.getElementById('phoneNumber').classList.add('is-invalid');
 		else
-		document.getElementById('phoneNumber').classList.remove('is-invalid');
+			document.getElementById('phoneNumber').classList.remove('is-invalid');
 		
-		if (!validateEmail(Email))
+		// if (!validateEmail(Email))
+		if (Email == '')
 			document.getElementById('email').classList.add('is-invalid');
 		else
 			document.getElementById('email').classList.remove('is-invalid');
-
 	}
 	else {
 		const res = await fetch('/LAMPAPI/CreateContact.php', {
@@ -341,26 +345,26 @@ async function addContact() {
 	}
 }
 
-function validatePhoneNumber(PhoneNumber) {
-	// var phonePatternOne = /^\d{3}-\d{3}-\d{4}$/;
-	var phonePatternTwo = /^\d{10}$/
+// function validatePhoneNumber(PhoneNumber) {
+//	// var phonePatternOne = /^\d{3}-\d{3}-\d{4}$/;
+// 	var phonePatternTwo = /^\d{10}$/
 
-	if (PhoneNumber.match(phonePatternTwo)) {
-		return true;
-	}
+// 	if (PhoneNumber.match(phonePatternTwo)) {
+// 		return true;
+// 	}
 
-	return false;
-}
+// 	return false;
+// }
 
-function validateEmail(Email) {
-	var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+// function validateEmail(Email) {
+// 	var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-	if (Email.match(emailPattern) || Email == '') {
-		return true;
-	}
+// 	if (Email.match(emailPattern) || Email == '') {
+// 		return true;
+// 	}
 
-	return false;
-}
+// 	return false;
+// }
 
 function clearCreateContact(){
 	document.getElementById('createErrorMessage').innerHTML = '';

@@ -53,8 +53,6 @@ function generateContactHtmlId(ContactID) {
 	return `contact_row_${ContactID}`;
 }
 
-// <button type="button" class="btn btn-dark btn-md btn-block" data-bs-toggle="collapse" data-bs-target="#createContactFormContainer" aria-expanded="false" aria-controls="createContactFormContainer" onclick="clearCreateContact()">Cancel</button>
-
 function convertContactToTableRow(contact) {
 	return `
 		<div id="${generateContactHtmlId(contact.ID)}" class="contacts row p-1">
@@ -286,7 +284,7 @@ async function searchContact(search) {
 }
 
 /******************************************************************************
- * Create contact stuff.
+ * Create contact functions.
  ******************************************************************************/
 
 /* Call the API to add a contact. Will automatically get data from the DOM. */
@@ -296,12 +294,31 @@ async function addContact() {
 	const PhoneNumber = document.getElementById('phoneNumber').value;
 	const Email = document.getElementById('email').value;
 
-	if (Name == '') {
-		complainAboutBlank('name');
-		return;
+	let anyErrs = false;
+
+	if (!isValidName(Name)) {
+		anyErrs = true;
+		complainAboutNameMalformed();
+	} else {
+		uncomplainAboutNameMalformed();
 	}
-	else {
-		uncomplainAboutBlank('name');
+
+	if (!isValidPhoneNumber(PhoneNumber)) {
+		anyErrs = true;
+		complainAboutPhoneNumberMalformed();
+	} else {
+		uncomplainAboutPhoneNumberMalformed();
+	}
+
+	if (!isValidEmail(Email)) {
+		anyErrs = true;
+		complainAboutEmailMalformed();
+	} else {
+		uncomplainAboutEmailMalformed();
+	}
+
+	if (anyErrs) {
+		return;
 	}
 
 	const res = await fetch('/LAMPAPI/CreateContact.php', {
@@ -326,35 +343,109 @@ async function addContact() {
 	Email.value = '';
 }
 
-// function validatePhoneNumber(PhoneNumber) {
-//	// var phonePatternOne = /^\d{3}-\d{3}-\d{4}$/;
-// 	var phonePatternTwo = /^\d{10}$/
+function isValidName(Name) {
+	const namePattern = /^[a-zA-Z0-9]+$/;
 
-// 	if (PhoneNumber.match(phonePatternTwo)) {
-// 		return true;
-// 	}
+	return Name.match(namePattern);
+}
 
-// 	return false;
-// }
+function isValidPhoneNumber(PhoneNumber) {
+	const phonePattern = /^\d{10}$/;
 
-// function validateEmail(Email) {
-// 	var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	return PhoneNumber.match(phonePattern) || PhoneNumber === '';
+}
 
-// 	if (Email.match(emailPattern) || Email == '') {
-// 		return true;
-// 	}
+function isValidEmail(Email) {
+	const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/;
 
-// 	return false;
-// }
+	return Email.match(emailPattern) || Email === '';
+}
 
-function clearCreateContact(){
-	// document.getElementById('createErrorMessage').innerHTML = '';
+function complainAboutNameMalformed() {
+	document.getElementById('nameComplainMalformed').innerHTML = 'Name cannot be blank and cannot contain special characters';
+	document.getElementById('nameComplainMalformed').classList.add('d-block');
+	document.getElementById('nameComplainMalformed').classList.remove('d-none');
+	document.getElementById('name').classList.add('is-invalid');
+}
+
+function uncomplainAboutNameMalformed() {
+	document.getElementById('nameComplainMalformed').innerHTML = '';
+	document.getElementById('nameComplainMalformed').classList.add('d-none');
+	document.getElementById('nameComplainMalformed').classList.remove('d-block');
 	document.getElementById('name').classList.remove('is-invalid');
+}
+
+function handleNameValidation(Name) {
+	if (Name == null)
+		Name = document.getElementById('name').value;
+
+	const isValid = isValidName(Name);
+	
+	if (isValid) {
+		uncomplainAboutNameMalformed();
+	} else {
+		complainAboutNameMalformed();
+	}
+
+	return isValid;
+}
+
+function complainAboutPhoneNumberMalformed() {
+	document.getElementById('phoneNumberComplainMalformed').innerHTML = 'Phone-number must be blank or be a 10-digit number in the form <i>xxxxxxxxxx</i>';
+	document.getElementById('phoneNumberComplainMalformed').classList.add('d-block');
+	document.getElementById('phoneNumberComplainMalformed').classList.remove('d-none');
+	document.getElementById('phoneNumber').classList.add('is-invalid');
+}
+
+function uncomplainAboutPhoneNumberMalformed() {
+	document.getElementById('phoneNumberComplainMalformed').innerHTML = '';
+	document.getElementById('phoneNumberComplainMalformed').classList.add('d-none');
+	document.getElementById('phoneNumberComplainMalformed').classList.remove('d-block');
 	document.getElementById('phoneNumber').classList.remove('is-invalid');
+}
+
+function handlePhoneNumberValidation(PhoneNumber) {
+	if (PhoneNumber == null)
+		PhoneNumber = document.getElementById('phoneNumber').value;
+
+	const isValid = isValidPhoneNumber(PhoneNumber);
+	
+	if (isValid) {
+		uncomplainAboutPhoneNumberMalformed();
+	} else {
+		complainAboutPhoneNumberMalformed();
+	}
+
+	return isValid;
+}
+
+function complainAboutEmailMalformed() {
+	document.getElementById('emailComplainMalformed').innerHTML = 'Email must be blank or in the form <i>xxx@xxx.xxx</i>';
+	document.getElementById('emailComplainMalformed').classList.add('d-block');
+	document.getElementById('emailComplainMalformed').classList.remove('d-none');
+	document.getElementById('email').classList.add('is-invalid');
+}
+
+function uncomplainAboutEmailMalformed() {
+	document.getElementById('emailComplainMalformed').innerHTML = '';
+	document.getElementById('emailComplainMalformed').classList.add('d-none');
+	document.getElementById('emailComplainMalformed').classList.remove('d-block');
 	document.getElementById('email').classList.remove('is-invalid');
-	document.getElementById('name').value = '';
-	document.getElementById('phoneNumber').value = '';
-	document.getElementById('email').value = '';
+}
+
+function handleEmailValidation(Email) {
+	if (Email == null)
+		Email = document.getElementById('email').value;
+
+	const isValid = isValidEmail(Email);
+	
+	if (isValid) {
+		uncomplainAboutEmailMalformed();
+	} else {
+		complainAboutEmailMalformed();
+	}
+
+	return isValid;
 }
 
 function complainAboutBlank(htmlId) {

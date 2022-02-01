@@ -328,7 +328,7 @@ async function addContact() {
 		});
 
 		if (!res.ok) {
-			document.getElementById('createErrorMessage').innerHTML = 'There was an error connecting to the server, try again later.';
+			document.getElementById('addContactResult').innerHTML = 'There was an error connecting to the server, try again later.';
 		}
 
 		const resJson = await res.json();
@@ -339,9 +339,9 @@ async function addContact() {
 			document.getElementById('addContactResult').innerHTML = 'Sign up successful!';
 		}
 
-		Name = '';
-		PhoneNumber = '';
-		Email = '';
+		Name.value = '';
+		PhoneNumber.value = '';
+		Email.value = '';
 	}
 }
 

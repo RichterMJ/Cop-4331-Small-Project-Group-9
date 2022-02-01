@@ -294,7 +294,7 @@ async function addContact() {
 
 	let err = false;
 
-	if (Name == '' || !validatePhoneNumber(PhoneNumber) || (!validateEmail(Email)  && Email !== '')) {
+	if (Name == '' || !validatePhoneNumber(PhoneNumber) || !validateEmail(Email)) {
 		err = true;
 	}
 
@@ -355,7 +355,7 @@ function validatePhoneNumber(PhoneNumber) {
 function validateEmail(Email) {
 	var emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-	if (Email.match(emailPattern)) {
+	if (Email.match(emailPattern) || Email == '') {
 		return true;
 	}
 

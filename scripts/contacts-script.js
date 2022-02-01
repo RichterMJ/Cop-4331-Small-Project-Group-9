@@ -339,9 +339,9 @@ async function addContact() {
 			document.getElementById('addContactResult').innerHTML = 'Sign up successful!';
 		}
 
-		Name.value = '';
-		PhoneNumber.value = '';
-		Email.value = '';
+		Name = '';
+		PhoneNumber = '';
+		Email = '';
 	}
 }
 

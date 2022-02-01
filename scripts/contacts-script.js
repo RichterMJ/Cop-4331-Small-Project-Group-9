@@ -285,6 +285,10 @@ async function searchContact(search) {
 
 }
 
+/******************************************************************************
+ * Create contact stuff.
+ ******************************************************************************/
+
 /* Call the API to add a contact. Will automatically get data from the DOM. */
 async function addContact() {
 
@@ -292,57 +296,36 @@ async function addContact() {
 	const PhoneNumber = document.getElementById('phoneNumber').value;
 	const Email = document.getElementById('email').value;
 
-	// let err = false;
-
-	// if (Name == '' || !validatePhoneNumber(PhoneNumber) || !validateEmail(Email)) {
-	// 	err = true;
-	// }
-
-	// if (err == true) {
 	if (Name == '') {
-		// document.getElementById('createErrorMessage').innerHTML = '***Please enter a name***';
-
-		// if (Name == '') 
-		// 	document.getElementById('name').classList.add('is-invalid');
-		// else
-		// 	document.getElementById('name').classList.remove('is-invalid');
-
-		document.getElementById('name').classList.add('is-invalid');
-		
-		// if (!validatePhoneNumber(PhoneNumber))
-		if (PhoneNumber == '')
-			document.getElementById('phoneNumber').classList.add('is-invalid');
-		else
-			document.getElementById('phoneNumber').classList.remove('is-invalid');
-		
-		// if (!validateEmail(Email))
-		if (Email == '')
-			document.getElementById('email').classList.add('is-invalid');
-		else
-			document.getElementById('email').classList.remove('is-invalid');
+		complainAboutBlank('name');
+		return;
 	}
 	else {
-		const res = await fetch('/LAMPAPI/CreateContact.php', {
-			method: 'POST',
-			body: JSON.stringify({ Name, PhoneNumber, Email, UserID }),
-		});
-
-		if (!res.ok) {
-			document.getElementById('addContactResult').innerHTML = 'There was an error connecting to the server, try again later.';
-		}
-
-		const resJson = await res.json();
-
-		if (resJson.error !== '') {
-			document.getElementById('addContactResult').innerHTML = resJson.error;
-		} else {
-			document.getElementById('addContactResult').innerHTML = 'Sign up successful!';
-		}
-
-		Name.value = '';
-		PhoneNumber.value = '';
-		Email.value = '';
+		uncomplainAboutBlank('name');
 	}
+
+	const res = await fetch('/LAMPAPI/CreateContact.php', {
+		method: 'POST',
+		body: JSON.stringify({ Name, PhoneNumber, Email, UserID }),
+	});
+
+	uncomplainAboutBlank('name');
+
+	if (!res.ok) {
+		document.getElementById('addContactResult').innerHTML = 'There was an error connecting to the server, try again later.';
+	}
+
+	const resJson = await res.json();
+
+	if (resJson.error !== '') {
+		document.getElementById('addContactResult').innerHTML = resJson.error;
+	} else {
+		document.getElementById('addContactResult').innerHTML = 'Sign up successful!';
+	}
+
+	Name.value = '';
+	PhoneNumber.value = '';
+	Email.value = '';
 }
 
 // function validatePhoneNumber(PhoneNumber) {
@@ -374,4 +357,18 @@ function clearCreateContact(){
 	document.getElementById('name').value = '';
 	document.getElementById('phoneNumber').value = '';
 	document.getElementById('email').value = '';
+}
+
+function complainAboutBlank(htmlId) {
+	document.getElementById(`${htmlId}ComplainBlank`).innerHTML = 'Field cannot be blank.';
+	document.getElementById(`${htmlId}ComplainBlank`).classList.add('d-block');
+	document.getElementById(`${htmlId}ComplainBlank`).classList.remove('d-none');
+	document.getElementById(htmlId).classList.add('is-invalid');
+}
+
+function uncomplainAboutBlank(htmlId) {
+	document.getElementById(`${htmlId}ComplainBlank`).innerHTML = '';
+	document.getElementById(`${htmlId}ComplainBlank`).classList.add('d-none');
+	document.getElementById(`${htmlId}ComplainBlank`).classList.remove('d-block');
+	document.getElementById(htmlId).classList.remove('is-invalid');
 }

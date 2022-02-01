@@ -37,11 +37,12 @@
 
 		<!-- Create contact form. -->
 		<div id="createContactFormContainer" class="collapse">
-			<form id="createContactForm" class="forms text-center px-5 py-3">
+			<form id="createContactForm" class="forms text-center px-5 py-3" onaction="return false">
 				<h3 class="m-3">Create New Contact</h3>
 				<span id="createErrorMessage" class="error-message"></span>
 				<div class="mb-3">
 					<input type="text" class="form-control" id="name" placeholder="Name" required>
+					<label class="form-label d-none" for="firstName" id="NameComplainBlank"></label>
 				</div>
 				<div class="mb-3">
 					<input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">

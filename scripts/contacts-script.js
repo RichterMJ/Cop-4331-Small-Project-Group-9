@@ -237,7 +237,7 @@ async function deleteContact(ContactID) {
 	const resJson = await res.json();
 
 	if (resJson.error !== '') {
-		document.getElementById('searchResults').innerHTML = resJson.error;
+		document.getElementById('searchResults').innerHTML = '<br/>' + resJson.error;
 	} else {
 		searchContact(latestSearchQuery);
 	}

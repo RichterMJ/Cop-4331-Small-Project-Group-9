@@ -105,7 +105,7 @@ function getMockContacts() {
 function editContact(contact) {
 	document.getElementById('editContactFormGoesHere').innerHTML = `
 			<!-- Edit contact form. -->
-			<form id="editContactForm" class="forms container text-center py-5">
+			<form id="editContactForm" class="forms container text-center py-5" onsubmit="return false">
 				<h2 class="m-3">Edit Contact Form</h2>
 				<span id="editErrorMessage" class="error-message"></span>
 				<div class="form-group mb-3 text-left">
@@ -150,7 +150,7 @@ function editContact(contact) {
 					</div>
 				</div>
 
-				<button id="editResults" type="button" class="btn btn-primary btn-outline-light btn-lg btn-block" onclick="updateContact(${contact.ID})">Edit</button>
+				<button id="editResults" type="submit" class="btn btn-primary btn-outline-light btn-lg btn-block" onclick="updateContact(${contact.ID})">Edit</button>
 				<button type="button" class="btn btn-info btn-outline-light btn-lg btn-block" onclick="cancelEditContact(${contact.ID})">Cancel</button>
 
 				<span id="addContactResult"></span>
@@ -280,7 +280,6 @@ async function searchContact(search) {
 		latestSearchResults = resJson.results;
 		document.getElementById('searchResultsData').innerHTML = resJson.results.map(convertContactToTableRow).join('');
 	}
-
 }
 
 /******************************************************************************
@@ -289,7 +288,6 @@ async function searchContact(search) {
 
 /* Call the API to add a contact. Will automatically get data from the DOM. */
 async function addContact() {
-
 	const Name = document.getElementById('name').value;
 	const PhoneNumber = document.getElementById('phoneNumber').value;
 	const Email = document.getElementById('email').value;
@@ -321,13 +319,20 @@ async function addContact() {
 		return;
 	}
 
-	const res = await fetch('/LAMPAPI/CreateContact.php', {
-		method: 'POST',
-		body: JSON.stringify({ Name, PhoneNumber, Email, UserID }),
-	});
+	let res;
+	try {
+		res = await fetch('/LAMPAPI/CreateContact.php', {
+			method: 'POST',
+			body: JSON.stringify({ Name, PhoneNumber, Email, UserID }),
+		});
+	} catch (e) {
+		document.getElementById('addContactResult').innerHTML = '<br/>There was an error connecting to the server, try again later.';
+		return;
+	}
 
 	if (!res.ok) {
-		document.getElementById('addContactResult').innerHTML = 'There was an error connecting to the server, try again later.';
+		document.getElementById('addContactResult').innerHTML = '<br/>There was an error connecting to the server, try again later.';
+		return;
 	}
 
 	const resJson = await res.json();
@@ -335,12 +340,20 @@ async function addContact() {
 	if (resJson.error !== '') {
 		document.getElementById('addContactResult').innerHTML = resJson.error;
 	} else {
-		document.getElementById('addContactResult').innerHTML = 'Sign up successful!';
+		clearCreateContact();
+		searchContact(latestSearchQuery);
+		$('#createContactFormContainer').collapse('hide')
 	}
+}
 
-	Name.value = '';
-	PhoneNumber.value = '';
-	Email.value = '';
+function clearCreateContact() {
+	document.getElementById('name').value = '';
+	document.getElementById('phoneNumber').value = '';
+	document.getElementById('email').value = '';
+
+	uncomplainAboutNameMalformed();
+	uncomplainAboutPhoneNumberMalformed();
+	uncomplainAboutEmailMalformed();
 }
 
 function isValidName(Name) {

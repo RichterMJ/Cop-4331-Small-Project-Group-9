@@ -215,7 +215,11 @@ async function updateContact(ContactID) {
 
 function cancelEditContact(ContactID) {
 	document.getElementById('editContactFormGoesHere').innerHTML = '';
-	document.getElementById(generateContactHtmlId(ContactID)).scrollIntoView({ block: 'center', behavior: 'smooth' });
+	try {
+		document.getElementById(generateContactHtmlId(ContactID)).scrollIntoView({ block: 'center', behavior: 'smooth' });
+	} catch (e) {
+		document.getElementById('searchResults').scrollIntoView({ block: 'center', behavior: 'smooth' });
+	}
 }
 
 /* Call the API to delete a contact. Must supply `ContactID` as an argument. */

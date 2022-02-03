@@ -107,7 +107,6 @@ function editContact(contact) {
 			<!-- Edit contact form. -->
 			<form id="editContactForm" class="forms container text-center py-5" onsubmit="return false">
 				<h2 class="m-3">Edit Contact Form</h2>
-				<span id="editErrorMessage" class="error-message"></span>
 				<div class="form-group mb-3 text-left">
 					<label for="editFromName">Name</label>
 
@@ -150,9 +149,9 @@ function editContact(contact) {
 					</div>
 				</div>
 
-				<span id="editResults" class="error-message></span>
+				<span id="editResultError" class="error-message></span>
 
-				<button type="submit" class="btn btn-primary btn-outline-light btn-lg btn-block" onclick="updateContact(${contact.ID})">Edit</button>
+				<button id="editResults" type="submit" class="btn btn-primary btn-outline-light btn-lg btn-block" onclick="updateContact(${contact.ID})">Edit</button>
 				<button type="button" class="btn btn-info btn-outline-light btn-lg btn-block" onclick="cancelEditContact(${contact.ID})">Cancel</button>
 			</form>
 	`;
@@ -198,13 +197,13 @@ async function updateContact(ContactID) {
 		});
 
 		if (!res.ok) {
-			document.getElementById('editErrorMessage').innerHTML = 'There was an error connecting to the server, try again later. No contacts deleted.';
+			document.getElementById('editResultError').innerHTML = 'There was an error connecting to the server, try again later. No contacts deleted.';
 		}
 
 		const resJson = await res.json();
 
 		if (resJson.error !== '') {
-			document.getElementById('editResults').innerHTML = resJson.error;
+			document.getElementById('editResultError').innerHTML = resJson.error;
 		} else {
 			searchContact(latestSearchQuery);
 			document.getElementById('editContactFormGoesHere').innerHTML = '';

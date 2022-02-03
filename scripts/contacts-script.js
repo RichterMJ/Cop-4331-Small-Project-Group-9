@@ -150,10 +150,10 @@ function editContact(contact) {
 					</div>
 				</div>
 
-				<button id="editResults" type="submit" class="btn btn-primary btn-outline-light btn-lg btn-block" onclick="updateContact(${contact.ID})">Edit</button>
-				<button type="button" class="btn btn-info btn-outline-light btn-lg btn-block" onclick="cancelEditContact(${contact.ID})">Cancel</button>
+				<span id="editResults" class="error-message></span>
 
-				<span id="addContactResult"></span>
+				<button type="submit" class="btn btn-primary btn-outline-light btn-lg btn-block" onclick="updateContact(${contact.ID})">Edit</button>
+				<button type="button" class="btn btn-info btn-outline-light btn-lg btn-block" onclick="cancelEditContact(${contact.ID})">Cancel</button>
 			</form>
 	`;
  
@@ -330,19 +330,19 @@ async function addContact() {
 			body: JSON.stringify({ Name, PhoneNumber, Email, UserID }),
 		});
 	} catch (e) {
-		document.getElementById('addContactResult').innerHTML = '<br/>There was an error connecting to the server, try again later.';
+		document.getElementById('createErrorMessage').innerHTML = '<br/>There was an error connecting to the server, try again later.';
 		return;
 	}
 
 	if (!res.ok) {
-		document.getElementById('addContactResult').innerHTML = '<br/>There was an error connecting to the server, try again later.';
+		document.getElementById('createErrorMessage').innerHTML = '<br/>There was an error connecting to the server, try again later.';
 		return;
 	}
 
 	const resJson = await res.json();
 
 	if (resJson.error !== '') {
-		document.getElementById('addContactResult').innerHTML = resJson.error;
+		document.getElementById('createErrorMessage').innerHTML = resJson.error;
 	} else {
 		clearCreateContact();
 		searchContact(latestSearchQuery);

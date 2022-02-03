@@ -39,7 +39,6 @@
 		<div id="createContactFormContainer" class="collapse">
 			<form id="createContactForm" class="forms text-center px-5 py-3" onsubmit="return false">
 				<h3 class="m-3">Create New Contact</h3>
-				<span id="createErrorMessage" class="error-message"></span>
 				<div class="mb-3">
 					<input type="text" class="form-control" id="name" placeholder="Name" oninput="handleNameValidation()" required>
 					<label class="form-label d-none" for="firstName" id="nameComplainBlank"></label>
@@ -53,9 +52,10 @@
 					<input type="text" class="form-control" id="email" placeholder="Email" oninput="handleEmailValidation()">
 					<label class="form-label d-none" for="firstName" id="emailComplainMalformed"></label>
 				</div>
+				<span id="createErrorMessage" class="error-message"></span>
+				<!-- <span id="addContactResult"></span> -->
 				<button type="submit" class="btn btn-dark btn-outline-light btn-md btn-block" onclick="addContact()">Add</button>
 				<button type="button" class="btn btn-info btn-outline-light btn-md btn-block" data-bs-toggle="collapse" data-bs-target="#createContactFormContainer" aria-expanded="false" aria-controls="createContactFormContainer" onclick="clearCreateContact()">Cancel</button>
-				<span id="addContactResult"></span>
 			</form>
 		</div>
 

@@ -20,7 +20,7 @@ if ($conn->connect_error) {
     if ($stmt->affected_rows == 1) {
         returnNoError();
     } else {
-        returnWithError('Could not update user with credentials: ' . $inData["Name"] . ', ' . $inData["PhoneNumber"] . ', ' . $inData["Email"]);
+        returnWithError('Error: A contact with the new information already exists');
     }	
 
     $stmt->close();

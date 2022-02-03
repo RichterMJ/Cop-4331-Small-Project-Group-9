@@ -149,7 +149,7 @@ function editContact(contact) {
 					</div>
 				</div>
 
-				<span id="editResultError" class="error-message></span>
+				<span id="editResultError" class="error-message"></span>
 
 				<button id="editResults" type="submit" class="btn btn-primary btn-outline-light btn-lg btn-block" onclick="updateContact(${contact.ID})">Edit</button>
 				<button type="button" class="btn btn-info btn-outline-light btn-lg btn-block" onclick="cancelEditContact(${contact.ID})">Cancel</button>

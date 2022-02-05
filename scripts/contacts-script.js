@@ -205,7 +205,8 @@ async function updateContact(ContactID) {
 
 		if (resJson.error !== '') {
 			document.getElementById('editResultError').innerHTML = resJson.error;
-		} 
+		}
+		// Check input formatting for edited information.
 		else if (!isValidName(toInfo.name)) {
 			document.getElementById('editResultError').innerHTML = 'Name cannot be blank and cannot contain special characters';
 		}

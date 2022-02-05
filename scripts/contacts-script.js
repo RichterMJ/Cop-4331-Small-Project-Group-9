@@ -206,13 +206,13 @@ async function updateContact(ContactID) {
 		if (resJson.error !== '') {
 			document.getElementById('editResultError').innerHTML = resJson.error;
 		} 
-		else if (!isValidName(fromInfo.name)) {
+		else if (!isValidName(toInfo.name)) {
 			document.getElementById('editResultError').innerHTML = 'Name cannot be blank and cannot contain special characters';
 		}
-		else if (!isValidPhoneNumber(fromInfo.number)) {
+		else if (!isValidPhoneNumber(toInfo.number)) {
 			document.getElementById('editResultError').innerHTML = 'Phone-number must be blank or be a 10-digit number in the form <i>xxxxxxxxxx</i>';
 		}
-		else if (!isValidEmail(fromInfo.email)) {
+		else if (!isValidEmail(toInfo.email)) {
 			document.getElementById('editResultError').innerHTML = 'Email must be blank or in the form <i>xxx@xxx.xxx</i>';
 		}
 		else {

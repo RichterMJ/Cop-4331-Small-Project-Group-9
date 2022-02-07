@@ -13,6 +13,9 @@ section {
 }
 
 .error-message-signup {
-	/* font-size: 1.2em; */
 	color: #cc330d;
+}
+
+.success-message-signup {
+	color: #09D870;
 }

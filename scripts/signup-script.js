@@ -56,7 +56,8 @@ async function signUp() {
     const PasswordRepeat = document.getElementById('passwordRepeat').value;
 
 	// add error styling class to  signupResult
-	document.getElementById('signupResult').classList.add('error-message');
+	document.getElementById('signupResult').classList.remove('success-message-signup');
+	document.getElementById('signupResult').classList.add('error-message-signup');
 
 	let anyBlank = false;
 	for (const htmlId of ['firstName', 'lastName', 'username', 'password']) {
@@ -95,7 +96,8 @@ async function signUp() {
     if (resJson.error !== '') {
         document.getElementById('signupResult').innerHTML = resJson.error;
     } else {
-		document.getElementById('signupResult').classList.remove('error-message');
+		document.getElementById('signupResult').classList.remove('error-message-signup');
+		document.getElementById('signupResult').classList.add('success-message-signup');
         document.getElementById('signupResult').innerHTML = 'Sign up successful!';
 		setTimeout(() => {
 			window.location.href = '/';

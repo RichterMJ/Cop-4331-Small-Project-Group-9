@@ -336,6 +336,7 @@ async function searchContact(search) {
 	} else {
 		latestSearchResults = resJson.results;
 		document.getElementById('searchResultsData').innerHTML = resJson.results.map(convertContactToTableRow).join('');
+		document.getElementById('deleteModals').innerHTML = getMockContacts().map(generateDeleteModal).join('');
 	}
 }
 

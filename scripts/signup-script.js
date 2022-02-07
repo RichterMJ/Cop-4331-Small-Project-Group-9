@@ -59,12 +59,17 @@ async function signUp() {
 	for (const htmlId of ['firstName', 'lastName', 'username', 'password']) {
 		handleBlankCheck(htmlId);
 		if (document.getElementById(htmlId).value === '') {
+			complainAboutBlank(htmlId);
 			anyBlank = true;
 		}
+		else {
+			uncomplainAboutBlank(htmlId);
+		}
 	}
-	if (anyBlank) {
-		return;
-	}
+
+	// if (anyBlank) {
+	// 	return;
+	// }
 
 	if (Password !== PasswordRepeat) {
 		complainAboutMismatchedPasswords();

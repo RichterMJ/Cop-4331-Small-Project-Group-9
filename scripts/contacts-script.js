@@ -10,11 +10,15 @@ const DEBUG = false;
 
 window.onload = function () {
 	if (DEBUG) {
+
+		console.log('DEBUG is set on. Loading fake data.');
+
 		UserID = 14;
 		FirstName = 'MR';
 		LastName = 'DEBUG';
 
 		document.getElementById('searchResultsData').innerHTML = getMockContacts().map(convertContactToTableRow).join('');
+		document.getElementById('deleteModals').innerHTML = getMockContacts().map(generateDeleteModal).join('');
 	} else {
 		// So secure <3
 		UserID = parseInt(getCookieVal('UserID'));
@@ -72,9 +76,47 @@ function generateUpdateButton(contact) {
 }
 
 function generateDeleteButton(contact) {
+//	return `
+//		<button class="btn btn-sm btn-block btn-outline-light btn-danger" onclick="deleteContact(${contact.ID})">Delete</button>
+//	`;
 	return `
-		<button class="btn btn-sm btn-block btn-outline-light btn-danger" onclick="deleteContact(${contact.ID})">Delete</button>
+		<button class="btn btn-sm btn-block btn-outline-light btn-danger" data-bs-toggle="modal" data-bs-target="#${generateDeleteModalId(contact)}">Delete</button>
 	`;
+}
+
+function generateDeleteModal(contact) {
+	return `
+		<div class="modal fade" id="${generateDeleteModalId(contact)}" tabindex="-1" role="dialog" aria-labelledby="${generateDeleteModalId(contact)}_label" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<h4 class="modal-title" id="${generateDeleteModalId(contact)}_label">Confirm Delete</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+					</div>
+
+					<div class="modal-body">
+						<p>Delete this contact?</p>
+						<ul>
+							<li>${contact.Name}</li>
+							<li>${contact.PhoneNumber}</li>
+							<li>${contact.Email}</li>
+						</ul>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-outline-light" data-bs-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-danger btn-ok btn-outline-light" data-bs-dismiss="modal" onclick="deleteContact(${contact.ID})">Delete</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	`;
+}
+
+function generateDeleteModalId(contact) {
+	return `deleteModal_contact${contact.ID}`;
 }
 
 function getMockContacts() {
@@ -188,7 +230,7 @@ async function updateContact(ContactID) {
 	};
 
 	// If there is no change in info the edit form closes.
-	if(JSON.stringify(fromInfo) === JSON.stringify(toInfo)) {
+	if (JSON.stringify(fromInfo) === JSON.stringify(toInfo)) {
 		cancelEditContact(ContactID);
 	}
 	else {

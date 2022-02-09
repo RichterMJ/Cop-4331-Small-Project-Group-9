@@ -108,5 +108,6 @@ async function signUp() {
     document.getElementById('lastName').value = '';
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
+    document.getElementById('passwordRepeat').value = '';
 }
 

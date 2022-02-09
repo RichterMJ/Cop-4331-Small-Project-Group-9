@@ -422,7 +422,7 @@ function isValidName(Name) {
 
 function isValidPhoneNumber(PhoneNumber) {
 	const phonePattern = /^\d{10}$/;
-	const phonePattern2 = /^\d{3}-\d{3}-\d{4}$/
+	const phonePattern2 = /^\(\d{3}\)-\d{3}-\d{4}$/
 
 	return PhoneNumber.match(phonePattern) || PhoneNumber.match(phonePattern2) || PhoneNumber === '';
 }
@@ -463,7 +463,7 @@ function handleNameValidation(Name) {
 }
 
 function complainAboutPhoneNumberMalformed() {
-	document.getElementById('phoneNumberComplainMalformed').innerHTML = 'Phone-number must be blank or be a 10-digit number in the form <i>xxxxxxxxxx</i>';
+	document.getElementById('phoneNumberComplainMalformed').innerHTML = 'Phone-number must be blank or be a 10-digit number in the form <i>xxxxxxxxxx</i> or <i>(xxx)-xxx-xxxx</i>';
 	document.getElementById('phoneNumberComplainMalformed').classList.add('d-block');
 	document.getElementById('phoneNumberComplainMalformed').classList.remove('d-none');
 	document.getElementById('phoneNumber').classList.add('is-invalid');

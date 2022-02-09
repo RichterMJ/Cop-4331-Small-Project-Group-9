@@ -20,6 +20,11 @@ if ($conn->connect_error) {
     $result = $stmt->get_result();
 
     if ($row = $result->fetch_assoc()) {
+        # Update the last time logged in
+        $stmt = $conn->prepare("UPDATE Users SET DateLastLoggedIn = current_timestamp() WHERE ID=?;");
+        $stmt->bind_param("s", $row['ID']);
+        $stmt->execute();
+
         returnWithInfo($row['FirstName'], $row['LastName'], $row['ID']);
     } else {
         returnWithError("Incorrect Username/Password Combination");

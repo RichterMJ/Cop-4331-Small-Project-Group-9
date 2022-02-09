@@ -422,8 +422,9 @@ function isValidName(Name) {
 
 function isValidPhoneNumber(PhoneNumber) {
 	const phonePattern = /^\d{10}$/;
+	const phonePattern2 = /^\d{3}-\d{3}-\d{4}$/
 
-	return PhoneNumber.match(phonePattern) || PhoneNumber === '';
+	return PhoneNumber.match(phonePattern) || PhoneNumber.match(phonePattern2) || PhoneNumber === '';
 }
 
 function isValidEmail(Email) {
